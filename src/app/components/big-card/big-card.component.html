@@ -1,0 +1,14 @@
+@if (bigCardOpen && selectedPokemon != null) {
+  <div class="big-card" [id]="selectedPokemon?.id">
+    <span>{{ selectedPokemon?.name }}</span>
+
+    <img
+      class="pokemon-image"
+      [src]="
+        selectedPokemon?.details?.sprites?.other['official-artwork']
+          .front_default
+      "
+      alt=""
+    />
+  </div>
+}

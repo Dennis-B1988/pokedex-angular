@@ -1,0 +1,121 @@
+.pokemon-card {
+    height: 400px;
+    width: 300px;
+    // background-color: #fb6d6c;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 5px 6px #5d5d5d;
+    box-shadow: 0px 0px 5px 6px #5d5d5d;
+    margin-top: 10px;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.pokemon-card:hover>div>.pokemon-image {
+    transform: scale(1.5);
+    transition: transform 0.5s ease-in-out;
+}
+
+.pokemon-card-top {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.pokemon-image {
+    height: 150px;
+    width: 150px;
+    z-index: 5;
+}
+
+.title-card {
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pokemon-name{
+    text-transform: capitalize;
+}
+
+.info-container {
+    height: 250px;
+    width: 95%;
+    background-color: white;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.about,
+.types-text {
+    font-weight: bold;
+}
+
+.middle-line {
+    height: 180px;
+    border: 1px solid rgb(168, 158, 158, 0.3);
+}
+
+.left-info,
+.right-info {
+    height: 180px;
+    width: 100px;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.weight,
+.height {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+}
+
+.info-icon {
+    height: 25px;
+    width: 25px;
+}
+
+.types {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-transform: capitalize;
+}
+
+.type {
+    width: 80px;
+    text-align: center;
+    border-radius: 10px;
+}

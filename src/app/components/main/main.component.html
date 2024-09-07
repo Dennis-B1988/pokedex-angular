@@ -1,0 +1,16 @@
+<section class="main">
+  <div class="search">
+    <app-search-result></app-search-result>
+  </div>
+
+  <app-cards></app-cards>
+
+  <button (click)="loadMorePokemons()">Load more</button>
+</section>
+
+@if (bigCard.bigCardOpen && bigCard.selectedPokemon != null) {
+  <app-big-card
+    [style.display]="bigCard.bigCardOpen ? 'flex' : 'none'"
+    (click)="bigCard.dNone()"
+  ></app-big-card>
+}

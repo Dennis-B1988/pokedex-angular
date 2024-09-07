@@ -37,6 +37,7 @@ yarn-error.log
 testem.log
 /typings
 /push.bat
+.prettierrc
 
 # System files
 .DS_Store

@@ -1,0 +1,83 @@
+@for (pokemon of pokemonService.pokemonSaved; track $index) {
+  @if ($index < main.index) {
+    <div
+      class="pokemon-card"
+      [id]="'pokemonCardId-' + ($index + 1)"
+      (click)="openBigPokedex(pokemonService.pokemonSaved[$index])"
+      [style]="{
+        background: pokemonService.getPokemonTypeColors(
+          pokemonService.pokemonSaved[$index].details?.types[0].type.name
+        ),
+      }"
+    >
+      <div class="pokemon-card-top"></div>
+      <div class="title-card">
+        <span class="pokemon-name">
+          {{ pokemonService.pokemonSaved[$index].name }}
+        </span>
+        <span class="pokemon-id">
+          @if (pokemonService.pokemonSaved[$index].id < 10) {
+            {{ "000" + pokemonService.pokemonSaved[$index].id }}
+          } @else if (pokemonService.pokemonSaved[$index].id < 100) {
+            {{ "00" + pokemonService.pokemonSaved[$index].id }}
+          } @else {
+            {{ "0" + pokemonService.pokemonSaved[$index].id }}
+          }
+        </span>
+      </div>
+      <img
+        class="pokemon-image"
+        [src]="
+          pokemonService.pokemonSaved[$index].details?.sprites?.other[
+            'official-artwork'
+          ].front_default
+        "
+        alt=""
+      />
+
+      <div class="info-container">
+        <div class="left-info">
+          <div class="info">
+            <div class="about">About</div>
+            <div class="about-info">
+              <div class="weight">
+                <img class="info-icon" src="../img/gewicht.png" alt="" />
+                <span class="pokemon-weight">{{
+                  pokemonService.pokemonSaved[$index].details?.weight / 10 +
+                    " kg"
+                }}</span>
+              </div>
+              <div class="height">
+                <img class="info-icon" src="../img/lineal.png" alt="" />
+                <span class="pokemon-height">{{
+                  pokemonService.pokemonSaved[$index].details?.height / 10 +
+                    " m"
+                }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="middle-line"></div>
+        <div class="right-info">
+          <div class="info">
+            <div class="types">
+              <span class="types-text">Types</span>
+              <span class="type">
+                {{
+                  pokemonService.pokemonSaved[$index].details?.types[0].type
+                    .name
+                }}
+              </span>
+              <span class="type">
+                {{
+                  pokemonService.pokemonSaved[$index].details?.types[1]?.type
+                    .name
+                }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+}

@@ -1,0 +1,27 @@
+// .big-card-background{
+//     // height: 100vh;
+//     // width: 100%;
+//     // background-color: rgba(151, 147, 147, 0.411);
+//     // display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     // z-index: 50;
+// }
+
+.big-card{
+    height: 500px;
+    width: 500px;
+    background-color: rgb(189, 24, 24);
+    border-radius: 10px;
+    // display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+// .is-hidden {
+//     display: none !important;
+// }
+
+// .is-visible {
+//     display: flex !important;
+// }
