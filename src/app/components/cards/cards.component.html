@@ -5,12 +5,13 @@
       [id]="'pokemonCardId-' + ($index + 1)"
       (click)="openBigPokedex(pokemonService.pokemonSaved[$index])"
       [style]="{
-        background: pokemonService.getPokemonTypeColors(
-          pokemonService.pokemonSaved[$index].details?.types[0].type.name
-        ),
+        boxShadow:
+          '0px 0px 10px 10px' +
+          pokemonService.getPokemonTypeColors(
+            pokemonService.pokemonSaved[$index].details?.types[0].type.name
+          ),
       }"
     >
-      <div class="pokemon-card-top"></div>
       <div class="title-card">
         <span class="pokemon-name">
           {{ pokemonService.pokemonSaved[$index].name }}
@@ -36,45 +37,34 @@
       />
 
       <div class="info-container">
-        <div class="left-info">
-          <div class="info">
-            <div class="about">About</div>
-            <div class="about-info">
-              <div class="weight">
-                <img class="info-icon" src="../img/gewicht.png" alt="" />
-                <span class="pokemon-weight">{{
-                  pokemonService.pokemonSaved[$index].details?.weight / 10 +
-                    " kg"
-                }}</span>
-              </div>
-              <div class="height">
-                <img class="info-icon" src="../img/lineal.png" alt="" />
-                <span class="pokemon-height">{{
-                  pokemonService.pokemonSaved[$index].details?.height / 10 +
-                    " m"
-                }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="middle-line"></div>
-        <div class="right-info">
-          <div class="info">
-            <div class="types">
-              <span class="types-text">Types</span>
-              <span class="type">
-                {{
+        <div class="info-middle">
+          <div class="types">
+            <span
+              class="type"
+              [style]="{
+                color: pokemonService.getPokemonTypeColors(
                   pokemonService.pokemonSaved[$index].details?.types[0].type
                     .name
-                }}
-              </span>
-              <span class="type">
-                {{
+                ),
+              }"
+            >
+              {{
+                pokemonService.pokemonSaved[$index].details?.types[0].type.name
+              }}
+            </span>
+            <span
+              class="type"
+              [style]="{
+                color: pokemonService.getPokemonTypeColors(
                   pokemonService.pokemonSaved[$index].details?.types[1]?.type
                     .name
-                }}
-              </span>
-            </div>
+                ),
+              }"
+            >
+              {{
+                pokemonService.pokemonSaved[$index].details?.types[1]?.type.name
+              }}
+            </span>
           </div>
         </div>
       </div>
