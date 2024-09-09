@@ -16,25 +16,13 @@ import { SearchComponent } from '../search/search.component';
 })
 export class MainComponent implements OnInit {
 
-  // pokemons = inject(CardsComponent);
   bigCard = inject(BigCardComponent);
 
 
-
-  // url = environment.pokemonURL;
-  // pokemons!: PokeAPI;
-
-  // pokemonSaved: any[] = [];
-
-  // index: number = 20;
-
-  constructor(private pokemonService: PokemonService) { }
+  constructor(public pokemonService: PokemonService) { }
 
 
   ngOnInit(): void {
-    // this.getPokemons();
-    // console.log(this.pokemonSaved);
-    // console.log(this.pokemonSaved[0].details.types[0]);
     this.pokemonService.getPokemons();
   }
 
@@ -54,5 +42,12 @@ export class MainComponent implements OnInit {
       pokemonCount += 20;
       pokemonMax += 20;
     }
+  }
+
+
+  closePokedex(event: MouseEvent): void {
+    this.bigCard.bigCardOpen = false;
+    document.body.style.overflow = 'auto';
+    console.log('bigCardOpen: ', this.bigCard.bigCardOpen);
   }
 }

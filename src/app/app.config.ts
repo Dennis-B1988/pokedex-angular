@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { BigCardComponent } from './components/big-card/big-card.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { SearchComponent } from './components/search/search.component';
+import { StatsChartComponent } from './components/stats-chart/stats-chart.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -12,6 +13,7 @@ export const appConfig: ApplicationConfig = {
   provideHttpClient(),
     CardsComponent,
     BigCardComponent,
-    SearchComponent
+    SearchComponent,
+    StatsChartComponent
   ],
 };

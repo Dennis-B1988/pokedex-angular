@@ -32,7 +32,7 @@ export class PokemonService implements OnInit {
 
     fetchPokemon(): Observable<PokeAPI> {
         return this.http
-            .get<PokeAPI>(`${this.pokeAPI}?limit=1000`)
+            .get<PokeAPI>(`${this.pokeAPI}?limit=1025`)
     }
 
 

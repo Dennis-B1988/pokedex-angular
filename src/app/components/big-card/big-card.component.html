@@ -1,6 +1,7 @@
 <div
   class="big-card"
   [id]="selectedPokemon?.id"
+  (click)="$event.stopPropagation()"
   [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
   [style]="{
     background: pokemonService.getPokemonTypeColors(
@@ -16,5 +17,14 @@
     "
     alt="{{ selectedPokemon?.name }}"
   />
-  <button (click)="dNone()">next pokemon</button>
+  <canvas #ctx height="250" width="350">
+    <app-stats-chart
+      [ctx]="canvas"
+      [selectedPokemon]="selectedPokemon"
+    ></app-stats-chart>
+  </canvas>
+
+  <button (click)="nextPokemon()">next pokemon</button>
+
+  <button (click)="previousPokemon()">previous pokemon</button>
 </div>

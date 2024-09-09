@@ -13,6 +13,7 @@
   <app-big-card
     [style.display]="bigCard.bigCardOpen ? 'flex' : 'none'"
     [selectedPokemon]="bigCard.selectedPokemon"
-    (click)="bigCard.dNone()"
+    [pokemonList]="pokemonService.pokemonSaved"
+    (click)="closePokedex($event)"
   ></app-big-card>
 }
