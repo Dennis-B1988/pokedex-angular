@@ -1,32 +1,3 @@
-<!-- @if (bigCardOpen && selectedPokemon) {
-  <div class="big-card" [id]="selectedPokemon?.id">
-    <span>{{ selectedPokemon?.name }}</span>
-
-    <img
-      class="pokemon-image"
-      [src]="
-        selectedPokemon?.details?.sprites?.other['official-artwork']
-          .front_default
-      "
-      alt=""
-    />
-  </div>
-} @else {
-  <div>No Pokémon selected</div>
-} -->
-
-<!-- <div *ngIf="bigCardOpen && selectedPokemon"></div>
-<div class="big-card" [id]="selectedPokemon?.id">
-  <span>{{ selectedPokemon?.name }}</span>
-  <img
-    class="pokemon-image"
-    [src]="
-      selectedPokemon?.details?.sprites?.other['official-artwork'].front_default
-    "
-    alt="{{ selectedPokemon?.name }}"
-  />
-</div> -->
-
 <div
   class="big-card"
   [id]="selectedPokemon?.id"
