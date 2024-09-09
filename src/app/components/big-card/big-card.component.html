@@ -1,4 +1,4 @@
-@if (bigCardOpen && selectedPokemon != null) {
+<!-- @if (bigCardOpen && selectedPokemon) {
   <div class="big-card" [id]="selectedPokemon?.id">
     <span>{{ selectedPokemon?.name }}</span>
 
@@ -11,4 +11,39 @@
       alt=""
     />
   </div>
-}
+} @else {
+  <div>No Pokémon selected</div>
+} -->
+
+<!-- <div *ngIf="bigCardOpen && selectedPokemon"></div>
+<div class="big-card" [id]="selectedPokemon?.id">
+  <span>{{ selectedPokemon?.name }}</span>
+  <img
+    class="pokemon-image"
+    [src]="
+      selectedPokemon?.details?.sprites?.other['official-artwork'].front_default
+    "
+    alt="{{ selectedPokemon?.name }}"
+  />
+</div> -->
+
+<div
+  class="big-card"
+  [id]="selectedPokemon?.id"
+  [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
+  [style]="{
+    background: pokemonService.getPokemonTypeColors(
+      selectedPokemon.details?.types[0].type.name
+    ),
+  }"
+>
+  <span>{{ selectedPokemon?.name }}</span>
+  <img
+    class="pokemon-image"
+    [src]="
+      selectedPokemon?.details?.sprites?.other['official-artwork'].front_default
+    "
+    alt="{{ selectedPokemon?.name }}"
+  />
+  <button (click)="dNone()">next pokemon</button>
+</div>

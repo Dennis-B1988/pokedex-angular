@@ -1,5 +1,5 @@
 @for (pokemon of pokemonService.pokemonSaved; track $index) {
-  @if ($index < main.index) {
+  @if ($index < pokemonService.pokemonMax) {
     <div
       class="pokemon-card"
       [id]="'pokemonCardId-' + ($index + 1)"

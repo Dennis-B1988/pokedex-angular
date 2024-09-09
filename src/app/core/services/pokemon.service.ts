@@ -10,13 +10,13 @@ import { PokeAPI, PokemonDetails, PokemonType, pokemonTypeColors, Results } from
 })
 export class PokemonService implements OnInit {
 
-
     pokeAPI: any;
     pokeSpeciesAPI: any;
 
     url = environment.pokemonURL;
     pokemons!: PokeAPI;
-    pokemonCount = 10
+    pokemonCount = 20;
+    pokemonMax = 20;
 
     pokemonSaved: any[] = [];
 
@@ -27,15 +27,12 @@ export class PokemonService implements OnInit {
     }
 
 
-    ngOnInit(): void {
-        // this.getPokemons();
-        // console.log(this.pokemonSaved);
-    }
+    ngOnInit(): void { }
 
 
     fetchPokemon(): Observable<PokeAPI> {
         return this.http
-            .get<PokeAPI>(`${this.pokeAPI}?limit=${this.pokemonCount}`)
+            .get<PokeAPI>(`${this.pokeAPI}?limit=1000`)
     }
 
 
@@ -49,15 +46,13 @@ export class PokemonService implements OnInit {
         this.fetchPokemon().subscribe((data: PokeAPI) => {
             this.pokemons = data;
 
-            if (this.pokemons.results && this.pokemons.results.length) {
+            if (this.pokemons.results && this.pokemons.results.length && this.pokemonCount <= this.pokemonMax) {
                 this.pokemons.results.forEach((pokemon) => {
                     pokemon.id = pokemon.url.split('/')[
                         pokemon.url.split('/').length - 2
                     ];
                     this.pokemonSaved.push(pokemon);
-
                     this.getPokemonDetails(pokemon);
-                    // this.getPokemonSpeciesDetails(pokemon);
                 });
             }
         });
@@ -68,34 +63,7 @@ export class PokemonService implements OnInit {
         this.fetchPokemonDetails(pokemon.name)
             .subscribe((details: PokemonDetails) => {
                 pokemon.details = details;
-
-                // if (pokemon.id === '151') {
-                // this.pokemonsLoaded = true;
-                // this.exportPokemons.emit(this.pokemons.results);
-                // console.log(this.pokemonSaved[0].details?.types?.[0]);
-
-                // console.log(`Details for ${pokemon.name}:`, pokemon.details);
-
-                // if (pokemon.details && pokemon.details.types) {
-                // console.log(`Types for ${pokemon.name}:`, pokemon.details.types);
-                // this.getPokemonTypes();
-                // console.log(`${pokemon.name}: ${pokemon.details.types
-                //   .map((typeInfo: PokemonType) => typeInfo.type.name)
-                //   .join(', ')}`);
-            }
-
-            );
-    }
-
-
-    getPokemonTypes(): void {
-        this.pokemonSaved.forEach(pokemon => {
-            // if (pokemon.types && pokemon.details.types) {
-            console.log(`${pokemon.name}: ${pokemon.details.types
-                .map((typeInfo: PokemonType) => typeInfo.type.name)
-                .join(', ')}`);
-            // }
-        })
+            });
     }
 
 

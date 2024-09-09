@@ -23,10 +23,10 @@ export class CardsComponent {
 
   openBigPokedex(pokemon: any) {
     console.log('Selected Pokemon:', pokemon.name);
-    // console.log('Selected Pokemon:', pokemon);
-    // console.log('Selected Pokemon details:', pokemon.details);
-    // console.log('Selected Pokemon details types:', pokemon.details.types);
     this.bigCard.selectedPokemon = pokemon;
+    console.log(this.pokemonService.getPokemonTypeColors(
+      pokemon.details?.types[0].type.name
+    ));
     this.bigCard.dNone()
   }
 }

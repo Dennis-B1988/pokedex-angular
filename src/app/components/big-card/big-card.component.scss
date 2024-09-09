@@ -11,17 +11,17 @@
 .big-card{
     height: 500px;
     width: 500px;
-    background-color: rgb(189, 24, 24);
+    // background-color: rgb(189, 24, 24);
     border-radius: 10px;
     // display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-// .is-hidden {
-//     display: none !important;
-// }
+.is-hidden {
+    display: none;
+}
 
-// .is-visible {
-//     display: flex !important;
-// }
+.is-visible {
+    display: flex;
+}

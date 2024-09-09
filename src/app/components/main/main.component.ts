@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
 
   // pokemons = inject(CardsComponent);
   bigCard = inject(BigCardComponent);
-  // @Input() id!: number;
+
 
 
   // url = environment.pokemonURL;
@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
 
   // pokemonSaved: any[] = [];
 
-  index: number = 20;
+  // index: number = 20;
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -40,6 +40,19 @@ export class MainComponent implements OnInit {
 
 
   loadMorePokemons(): void {
-    this.index += 20;
+    this.increasePokemonMax();
+    this.pokemonService.getPokemons();
+    console.log(this.pokemonService.pokemonCount);
+    console.log(this.pokemonService.pokemonMax);
+  }
+
+
+  increasePokemonMax(): void {
+    let pokemonCount = this.pokemonService.pokemonCount;
+    let pokemonMax = this.pokemonService.pokemonMax;
+    if (pokemonCount <= pokemonMax) {
+      pokemonCount += 20;
+      pokemonMax += 20;
+    }
   }
 }
