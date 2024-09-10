@@ -17,7 +17,6 @@ export class BigCardComponent implements OnChanges {
 
   @ViewChild('ctx', { static: false }) canvas!: ElementRef<HTMLCanvasElement>;
 
-  pokemonStats = inject(StatsChartComponent);
 
   bigCardOpen: boolean = false;
   isLoading = false;

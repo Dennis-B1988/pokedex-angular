@@ -17,14 +17,15 @@
     "
     alt="{{ selectedPokemon?.name }}"
   />
-  <canvas #ctx height="250" width="350">
+  <canvas #ctx>
     <app-stats-chart
       [ctx]="canvas"
       [selectedPokemon]="selectedPokemon"
     ></app-stats-chart>
   </canvas>
 
-  <button (click)="nextPokemon()">next pokemon</button>
-
-  <button (click)="previousPokemon()">previous pokemon</button>
+  <div class="change-pokemon">
+    <button (click)="previousPokemon()"><</button>
+    <button (click)="nextPokemon()">></button>
+  </div>
 </div>

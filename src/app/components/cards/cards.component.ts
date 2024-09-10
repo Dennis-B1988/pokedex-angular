@@ -21,18 +21,10 @@ export class CardsComponent {
   constructor(public pokemonService: PokemonService) { }
 
 
-  // openBigPokedex(pokemon: any) {
-  //   console.log('Selected Pokemon:', pokemon.name);
-  //   this.bigCard.selectedPokemon = pokemon;
-  //   this.bigCard.pokemonList = this.pokemonService.pokemonSaved;
-  //   this.bigCard.dNone()
-  // }
-
   openBigPokedex(pokemon: any) {
     console.log('Selected Pokemon:', pokemon.name);
     this.bigCard.selectedPokemon = pokemon;
     this.bigCard.pokemonList = this.pokemonService.pokemonSaved; // Ensure pokemonList is passed
     this.bigCard.openPokedex();
   }
-
 }

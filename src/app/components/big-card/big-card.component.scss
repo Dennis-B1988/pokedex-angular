@@ -1,16 +1,35 @@
-.big-card{
-    height: 500px;
-    width: 500px;
+.big-card {
+    height: 60%;
+    width: 60%;
     border-radius: 10px;
     // display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
+
+    canvas {
+        width: 250px;
+        height: 200px;
+    }
 }
 
-.is-hidden {
-    display: none;
-}
+// .is-hidden {
+//     display: none;
+// }
 
 .is-visible {
     display: flex;
+}
+
+.change-pokemon {
+    display: flex;
+    justify-content: center;
+    gap: 1.875rem;
+
+    button {
+        border: none;
+        background-color: transparent;
+        font-size: 2.5rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
 }

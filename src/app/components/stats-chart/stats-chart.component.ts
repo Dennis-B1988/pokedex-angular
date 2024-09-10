@@ -19,14 +19,6 @@ export class StatsChartComponent implements OnChanges {
   constructor() { }
 
 
-  // ngOnChanges() {
-  //   if (this.ctx && this.selectedPokemon && this.selectedPokemon.details && this.selectedPokemon.details.stats) {
-  //     this.pokemonChart();
-  //   } else {
-  //     console.warn("Selected Pokemon details or stats are not available yet.");
-  //   }
-  // }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['ctx'] || changes['selectedPokemon']) {
       if (this.ctx && this.selectedPokemon?.details?.stats) {
@@ -40,8 +32,8 @@ export class StatsChartComponent implements OnChanges {
   setCanvasDimensions() {
     if (this.ctx) {
       const canvas = this.ctx.nativeElement;
-      canvas.width = 350;  // Set width in pixels
-      canvas.height = 250; // Set height in pixels
+      canvas.width = 350;
+      canvas.height = 250;
     }
   }
 
