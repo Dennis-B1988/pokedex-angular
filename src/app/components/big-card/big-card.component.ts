@@ -67,4 +67,22 @@ export class BigCardComponent implements OnChanges {
       }, 300);
     }
   }
+
+
+  gradientColor(pokeonColorOne: string, pokeonColorTwo: string) {
+    if (this.pokemonService.getPokemonTypeColors(
+      this.selectedPokemon.details?.types[1]?.type.name
+    )) {
+      return `linear-gradient(90deg, 
+              ${pokeonColorTwo} 0%, 
+              ${pokeonColorOne} 10%, 
+              ${pokeonColorOne} 50%, 
+              ${pokeonColorOne} 90%, 
+              ${pokeonColorTwo} 100%)`;
+    } else {
+      return this.pokemonService.getPokemonTypeColors(
+        this.selectedPokemon.details?.types[0]?.type.name
+      )
+    }
+  }
 }

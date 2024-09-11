@@ -81,11 +81,22 @@ export class StatsChartComponent implements OnChanges {
           scales: {
             y: {
               max: 255,
+              ticks: {
+                color: 'white',
+              }
+            },
+            x: {
+              ticks: {
+                color: 'white',
+              }
             },
           },
           plugins: {
             legend: {
               display: false,
+              labels: {
+                color: 'white',
+              }
             },
           },
           indexAxis: 'x',

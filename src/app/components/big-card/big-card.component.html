@@ -4,28 +4,53 @@
   (click)="$event.stopPropagation()"
   [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
   [style]="{
+    background: gradientColor(
+      pokemonService.getPokemonTypeColors(
+        selectedPokemon.details?.types[0].type.name
+      ),
+      pokemonService.getPokemonTypeColors(
+        selectedPokemon.details?.types[1]?.type.name
+      )
+    ),
+  }"
+>
+  <div class="big-card-top">
+    <span class="pokemon-name">{{ selectedPokemon?.name }}</span>
+  </div>
+  <div class="pokemon-image">
+    <img
+      [src]="
+        selectedPokemon?.details?.sprites?.other['official-artwork']
+          .front_default
+      "
+      alt="{{ selectedPokemon?.name }}"
+    />
+  </div>
+  <div class="pokemon-info">
+    <div class="pokemon-stats">
+      <canvas #ctx style="width: 100%; height: 100%" width="150" height="150">
+        <app-stats-chart
+          [ctx]="canvas"
+          [selectedPokemon]="selectedPokemon"
+        ></app-stats-chart>
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="change-pokemon" (click)="$event.stopPropagation()">
+  <button (click)="previousPokemon()"><</button>
+  <button (click)="nextPokemon()">></button>
+</div>
+
+<!-- <div
+  class="big-card"
+  [id]="selectedPokemon?.id"
+  (click)="$event.stopPropagation()"
+  [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
+  [style]="{
     background: pokemonService.getPokemonTypeColors(
       selectedPokemon.details?.types[0].type.name
     ),
   }"
->
-  <span>{{ selectedPokemon?.name }}</span>
-  <img
-    class="pokemon-image"
-    [src]="
-      selectedPokemon?.details?.sprites?.other['official-artwork'].front_default
-    "
-    alt="{{ selectedPokemon?.name }}"
-  />
-  <canvas #ctx>
-    <app-stats-chart
-      [ctx]="canvas"
-      [selectedPokemon]="selectedPokemon"
-    ></app-stats-chart>
-  </canvas>
-
-  <div class="change-pokemon">
-    <button (click)="previousPokemon()"><</button>
-    <button (click)="nextPokemon()">></button>
-  </div>
-</div>
+> -->

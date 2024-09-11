@@ -1,15 +1,14 @@
 .big-card {
     height: 60%;
     width: 60%;
-    border-radius: 10px;
+    border-radius: .625rem;
     // display: flex;
     flex-direction: column;
-    // justify-content: space-between;
-
-    canvas {
-        width: 250px;
-        height: 200px;
-    }
+    justify-content: space-between;
+    align-items: center;
+    text-shadow: -0.3125rem .3125rem .3125rem #000000;
+    // background: rgb(133, 21, 7);
+    // background: linear-gradient(90deg, rgba(133, 21, 7, 1) 0%, rgba(254, 43, 0, 1) 53%, rgba(133, 21, 7, 1) 100%);
 }
 
 // .is-hidden {
@@ -20,16 +19,74 @@
     display: flex;
 }
 
+.big-card-top {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.pokemon-name{
+    width: 50%;
+    border-radius: 1.25rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: #ffffff;
+}
+
+.pokemon-image{
+    height: 40%;
+    display: flex;
+    justify-content: center;
+
+    img {
+        height: 100%;
+    }
+}
+
+.pokemon-info{
+    height: 50%;
+    width: 95%;
+    border-radius: .625rem .625rem 0 0;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    // gap: 1.875rem;
+    background: linear-gradient(112.1deg, rgb(25, 25, 26) 11.4%, rgb(49, 49, 51) 70.2%);
+    color: #ffffff;
+}
+
+.pokemon-stats{
+    height: 75%;
+    width: 90%;
+}
+
 .change-pokemon {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1.875rem;
 
     button {
+        height: 3.125rem;
+        width: 3.125rem;
         border: none;
-        background-color: transparent;
-        font-size: 2.5rem;
-        font-weight: bold;
+        border-radius: 50%;
+        background-color: #ffffff7e;
+        font-size: 3.5rem;
+        font-weight: 700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
+
+        &:hover {
+            background-color: #ffffff;
+        }
     }
 }

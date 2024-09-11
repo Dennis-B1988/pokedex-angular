@@ -23,6 +23,8 @@ app-big-card{
     background-color: rgba(151, 147, 147, 0.411);
     z-index: 50;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: .9375rem;
 }
