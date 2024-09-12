@@ -14,6 +14,7 @@ export class PokemonService implements OnInit {
     pokeSpeciesAPI: any;
 
     url = environment.pokemonURL;
+
     pokemons!: PokeAPI;
     pokemonCount = 20;
     pokemonMax = 20;
@@ -53,7 +54,10 @@ export class PokemonService implements OnInit {
                     ];
                     this.pokemonSaved.push(pokemon);
                     this.getPokemonDetails(pokemon);
+                    // this.getPokemonSpecies(pokemon);
                 });
+                console.log(this.pokemonSaved);
+                console.log(this.pokemons);
             }
         });
     }

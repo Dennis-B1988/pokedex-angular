@@ -45,7 +45,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  closePokedex(event: MouseEvent): void {
+  closePokedex(): void {
     this.bigCard.bigCardOpen = false;
     document.body.style.overflow = 'auto';
     console.log('bigCardOpen: ', this.bigCard.bigCardOpen);

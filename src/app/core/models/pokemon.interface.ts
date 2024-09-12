@@ -39,11 +39,11 @@ export interface PokeAPI {
 
 export interface PokemonDetails {
     // id: number
-    // name: string
-    // sprites: { front_shiny: string };
-    abilities?: Array<any>;
+    name?: string
+    sprites?: string;
+    // abilities?: Array<any>;
+    types?: Array<any>;
     stats?: Array<any>;
-    // types?: Array<any>;
 }
 
 

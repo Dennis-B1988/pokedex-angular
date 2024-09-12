@@ -83,11 +83,17 @@ export class StatsChartComponent implements OnChanges {
               max: 255,
               ticks: {
                 color: 'white',
+              },
+              grid: {
+                color: '#6b6b6b',
               }
             },
             x: {
               ticks: {
                 color: 'white',
+              },
+              grid: {
+                color: '#6b6b6b',
               }
             },
           },

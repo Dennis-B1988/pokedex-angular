@@ -26,7 +26,47 @@
       alt="{{ selectedPokemon?.name }}"
     />
   </div>
-  <div class="pokemon-info">
+  <div class="pokemon-info-container">
+    <div class="pokemon-info">
+      <div class="pokemon-types">
+        <span
+          class="type"
+          [style]="{
+            color: pokemonService.getPokemonTypeColors(
+              selectedPokemon.details?.types[0].type.name
+            ),
+          }"
+        >
+          {{ selectedPokemon?.details?.types[0].type.name }}
+        </span>
+        <span
+          class="type"
+          [style]="{
+            color: pokemonService.getPokemonTypeColors(
+              selectedPokemon.details?.types[1]?.type.name
+            ),
+          }"
+        >
+          {{ selectedPokemon?.details?.types[1]?.type.name }}
+        </span>
+      </div>
+      <div class="evolves-from">
+        <span>Evolves from:</span>
+        @if (selectedPokemon?.species?.evolves_from_species != null) {
+          <span>{{
+            selectedPokemon?.species?.evolves_from_species?.name
+          }}</span>
+        }
+      </div>
+      <div class="height-weight">
+        <div class="height">
+          <span>{{ selectedPokemon?.details?.height / 10 + " m" }}</span>
+        </div>
+        <div class="weight">
+          <span>{{ selectedPokemon?.details?.weight / 10 + " kg" }}</span>
+        </div>
+      </div>
+    </div>
     <div class="pokemon-stats">
       <canvas #ctx style="width: 100%; height: 100%" width="150" height="150">
         <app-stats-chart
@@ -42,15 +82,3 @@
   <button (click)="previousPokemon()"><</button>
   <button (click)="nextPokemon()">></button>
 </div>
-
-<!-- <div
-  class="big-card"
-  [id]="selectedPokemon?.id"
-  (click)="$event.stopPropagation()"
-  [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
-  [style]="{
-    background: pokemonService.getPokemonTypeColors(
-      selectedPokemon.details?.types[0].type.name
-    ),
-  }"
-> -->
