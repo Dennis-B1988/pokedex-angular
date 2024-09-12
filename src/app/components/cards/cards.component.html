@@ -22,7 +22,7 @@
           } @else if (pokemonService.pokemonSaved[$index].id < 100) {
             {{ "00" + pokemonService.pokemonSaved[$index].id }}
           } @else {
-            {{ "0" + pokemonService.pokemonSaved[$index].id }}
+            {{ pokemonService.pokemonSaved[$index].id }}
           }
         </span>
       </div>

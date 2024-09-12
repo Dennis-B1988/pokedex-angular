@@ -25,25 +25,31 @@ export interface Results {
     url: string;
     id?: string;
     details?: PokemonDetails;
-    // description?: string;
-    // types?: string;
 }
 
 
 export interface PokeAPI {
-    // count: number;
-    // next: string;
+    count: number;
+    next: string;
     results: Results[];
 }
 
 
 export interface PokemonDetails {
-    // id: number
-    name?: string
-    sprites?: string;
-    // abilities?: Array<any>;
-    types?: Array<any>;
-    stats?: Array<any>;
+    name: string;
+    id: number;
+    sprites: Sprites;
+    types?: PokemonType;
+}
+
+
+export interface Sprites {
+    other: {
+        'official-artwork': {
+            front_default: string;
+        };
+    }
+    ;
 }
 
 

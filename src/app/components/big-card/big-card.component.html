@@ -15,7 +15,17 @@
   }"
 >
   <div class="big-card-top">
+    <span class="placeholder"></span>
     <span class="pokemon-name">{{ selectedPokemon?.name }}</span>
+    <span class="pokemon-id">
+      @if (selectedPokemon.id < 10) {
+        {{ "000" + selectedPokemon.id }}
+      } @else if (selectedPokemon.id < 100) {
+        {{ "00" + selectedPokemon.id }}
+      } @else {
+        {{ selectedPokemon.id }}
+      }
+    </span>
   </div>
   <div class="pokemon-image">
     <img
@@ -28,6 +38,11 @@
   </div>
   <div class="pokemon-info-container">
     <div class="pokemon-info">
+      <div class="abilities">
+        <span class="abilities-title">Abilities:</span>
+        <span>{{ selectedPokemon?.details?.abilities[0].ability.name }}</span>
+        <span>{{ selectedPokemon?.details?.abilities[1]?.ability.name }}</span>
+      </div>
       <div class="pokemon-types">
         <span
           class="type"
@@ -49,14 +64,6 @@
         >
           {{ selectedPokemon?.details?.types[1]?.type.name }}
         </span>
-      </div>
-      <div class="evolves-from">
-        <span>Evolves from:</span>
-        @if (selectedPokemon?.species?.evolves_from_species != null) {
-          <span>{{
-            selectedPokemon?.species?.evolves_from_species?.name
-          }}</span>
-        }
       </div>
       <div class="height-weight">
         <div class="height">

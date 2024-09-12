@@ -11,7 +11,6 @@ import { PokeAPI, PokemonDetails, PokemonType, pokemonTypeColors, Results } from
 export class PokemonService implements OnInit {
 
     pokeAPI: any;
-    pokeSpeciesAPI: any;
 
     url = environment.pokemonURL;
 
@@ -24,7 +23,6 @@ export class PokemonService implements OnInit {
 
     constructor(private http: HttpClient) {
         this.pokeAPI = environment.pokemonURL;
-        this.pokeSpeciesAPI = environment.pokemonSpeciesURL;
     }
 
 
@@ -54,10 +52,8 @@ export class PokemonService implements OnInit {
                     ];
                     this.pokemonSaved.push(pokemon);
                     this.getPokemonDetails(pokemon);
-                    // this.getPokemonSpecies(pokemon);
                 });
                 console.log(this.pokemonSaved);
-                console.log(this.pokemons);
             }
         });
     }
@@ -77,5 +73,10 @@ export class PokemonService implements OnInit {
         } else {
             return '';
         }
+    }
+
+
+    sanitizePokemonName(name: string): string {
+        return name.replace(/-\w+$/, '');
     }
 }
