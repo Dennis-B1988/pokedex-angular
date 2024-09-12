@@ -1,5 +1,6 @@
 <app-header></app-header>
 
-<section class="card-container">
+<section #cardContainer class="card-container">
   <router-outlet />
+  <div class="scroll-to-top" (click)="scrollToTop()">Back to Top</div>
 </section>

@@ -2,18 +2,13 @@
     height: 60%;
     width: 60%;
     border-radius: .625rem;
-    // display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-shadow: -0.3125rem .3125rem .3125rem #000000;
-    // background: rgb(133, 21, 7);
-    // background: linear-gradient(90deg, rgba(133, 21, 7, 1) 0%, rgba(254, 43, 0, 1) 53%, rgba(133, 21, 7, 1) 100%);
+    cursor: default;
 }
 
-// .is-hidden {
-//     display: none;
-// }
 
 .is-visible {
     display: flex;
@@ -69,7 +64,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    // gap: 1.875rem;
     background: linear-gradient(112.1deg, rgb(25, 25, 26) 11.4%, rgb(49, 49, 51) 70.2%);
     color: #ffffff;
 }

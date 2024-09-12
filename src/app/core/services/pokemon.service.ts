@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
+import { color } from 'chart.js/helpers';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environment/environment';
 import { PokeAPI, PokemonDetails, PokemonType, pokemonTypeColors, Results } from '../models/pokemon.interface';
@@ -15,8 +16,9 @@ export class PokemonService implements OnInit {
     url = environment.pokemonURL;
 
     pokemons!: PokeAPI;
-    pokemonCount = 20;
-    pokemonMax = 20;
+    pokemonCount = 0;
+    pokemonShown = 36;
+    pokemonMax = 1025;
 
     pokemonSaved: any[] = [];
 
@@ -31,7 +33,7 @@ export class PokemonService implements OnInit {
 
     fetchPokemon(): Observable<PokeAPI> {
         return this.http
-            .get<PokeAPI>(`${this.pokeAPI}?limit=1025`)
+            .get<PokeAPI>(`${this.pokeAPI}?limit=${this.pokemonMax}`)
     }
 
 
@@ -44,15 +46,24 @@ export class PokemonService implements OnInit {
     getPokemons(): void {
         this.fetchPokemon().subscribe((data: PokeAPI) => {
             this.pokemons = data;
+            // this.pokemonCount = 0;
 
-            if (this.pokemons.results && this.pokemons.results.length && this.pokemonCount <= this.pokemonMax) {
-                this.pokemons.results.forEach((pokemon) => {
-                    pokemon.id = pokemon.url.split('/')[
-                        pokemon.url.split('/').length - 2
-                    ];
-                    this.pokemonSaved.push(pokemon);
-                    this.getPokemonDetails(pokemon);
-                });
+            if (this.pokemons.results && this.pokemons.results.length) {
+                this.pokemons.results
+                    .slice(this.pokemonCount)
+                    .forEach((pokemon) => {
+                        if (this.pokemonCount < this.pokemonShown) {
+                            pokemon.id = pokemon.url.split('/')[
+                                pokemon.url.split('/').length - 2
+                            ];
+                            this.pokemonSaved.push(pokemon);
+                            this.getPokemonDetails(pokemon);
+                            if (this.pokemonCount < this.pokemonMax) {
+                                this.pokemonCount++;
+                                console.log('PokemonCount: ', this.pokemonCount);
+                            }
+                        }
+                    });
                 console.log(this.pokemonSaved);
             }
         });

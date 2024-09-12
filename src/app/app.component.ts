@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 
@@ -11,4 +11,15 @@ import { HeaderComponent } from "./components/header/header.component";
 })
 export class AppComponent {
   title = 'pokedex-angular';
+
+  @ViewChild('cardContainer', { static: false }) cardContainer!: ElementRef;
+
+  constructor() { }
+
+
+  scrollToTop() {
+    if (this.cardContainer) {
+      this.cardContainer.nativeElement.scrollTop = 0;
+    }
+  }
 }

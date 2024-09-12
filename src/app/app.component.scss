@@ -5,4 +5,23 @@
     align-items: center;
     overflow-y: auto;
     scrollbar-width: thin;
+    position: relative;
+}
+
+.scroll-to-top{
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: #fff;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 10px #000
 }
