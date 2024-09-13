@@ -2,7 +2,14 @@
   <div class="search">
     <app-search-result></app-search-result>
   </div>
-  <button (click)="loadMorePokemons()">Load more</button>
+  <button
+    [style.display]="
+      pokemonService.pokemonCount < pokemonService.pokemonMax ? 'block' : 'none'
+    "
+    (click)="loadMorePokemons()"
+  >
+    Load more
+  </button>
 
   <app-cards></app-cards>
 

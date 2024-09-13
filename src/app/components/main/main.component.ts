@@ -28,15 +28,21 @@ export class MainComponent implements OnInit {
 
 
   loadMorePokemons(): void {
-    this.increasePokemonMax();
-    this.pokemonService.getPokemons();
-    console.log(this.pokemonService.pokemonCount);
-    console.log(this.pokemonService.pokemonShown);
+    if (this.pokemonService.pokemonCount < this.pokemonService.pokemonMax) {
+      this.increasePokemonMax();
+      this.pokemonService.getPokemons();
+      console.log(this.pokemonService.pokemonCount);
+      console.log(this.pokemonService.pokemonShown);
+    }
   }
 
 
   increasePokemonMax(): void {
-    this.pokemonService.pokemonShown += 36;
+    if ((this.pokemonService.pokemonCount + 36) < this.pokemonService.pokemonMax) {
+      this.pokemonService.pokemonShown += 36;
+    } else {
+      this.pokemonService.pokemonShown = this.pokemonService.pokemonMax;
+    }
   }
 
 

@@ -1,9 +1,9 @@
 .pokemon-card {
-    height: 300px;
-    width: 300px;
+    height: 18.75rem;
+    width: 18.75rem;
     background: linear-gradient(112.1deg, rgb(25, 25, 26) 11.4%, rgb(49, 49, 51) 70.2%);
     color: white;
-    border-radius: 10px;
+    border-radius: .625rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,16 +39,16 @@
 
 .pokemon-name{
     text-transform: capitalize;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .pokemon-id {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .pokemon-image {
-    height: 150px;
-    width: 150px;
+    height: 9.375rem;
+    width: 9.375rem;
 
     &:hover {
         transform: scale(1.5);

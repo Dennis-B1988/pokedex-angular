@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { BigCardComponent } from './components/big-card/big-card.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { MainComponent } from './components/main/main.component';
 import { SearchComponent } from './components/search/search.component';
 import { StatsChartComponent } from './components/stats-chart/stats-chart.component';
 
@@ -11,6 +12,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
   provideRouter(routes),
   provideHttpClient(),
+    MainComponent,
     CardsComponent,
     BigCardComponent,
     SearchComponent,
