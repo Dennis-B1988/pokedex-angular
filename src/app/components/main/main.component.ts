@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { PokemonService } from '../../core/services/pokemon.service';
+import { AppComponent } from '../../app.component';
 import { BigCardComponent } from '../big-card/big-card.component';
 import { CardsComponent } from '../cards/cards.component';
 import { HeaderComponent } from '../header/header.component';
@@ -14,36 +14,12 @@ import { SearchComponent } from '../search/search.component';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   bigCard = inject(BigCardComponent);
 
 
-  constructor(public pokemonService: PokemonService) { }
-
-
-  ngOnInit(): void {
-    this.pokemonService.getPokemons();
-  }
-
-
-  loadMorePokemons(): void {
-    if (this.pokemonService.pokemonCount < this.pokemonService.pokemonMax) {
-      this.increasePokemonMax();
-      this.pokemonService.getPokemons();
-      console.log(this.pokemonService.pokemonCount);
-      console.log(this.pokemonService.pokemonShown);
-    }
-  }
-
-
-  increasePokemonMax(): void {
-    if ((this.pokemonService.pokemonCount + 36) < this.pokemonService.pokemonMax) {
-      this.pokemonService.pokemonShown += 36;
-    } else {
-      this.pokemonService.pokemonShown = this.pokemonService.pokemonMax;
-    }
-  }
+  constructor(public app: AppComponent) { }
 
 
   closePokedex(): void {

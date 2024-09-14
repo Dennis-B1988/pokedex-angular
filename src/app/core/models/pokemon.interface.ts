@@ -25,6 +25,7 @@ export interface Results {
     url: string;
     id?: string;
     details?: PokemonDetails;
+    species?: PokemonSpecies;
 }
 
 
@@ -40,6 +41,13 @@ export interface PokemonDetails {
     id: number;
     sprites: Sprites;
     types?: PokemonType;
+}
+
+
+export interface PokemonSpecies {
+    name: string;
+    id: number;
+    evolves_from_species?: string;
 }
 
 

@@ -1,9 +1,8 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { PokemonService } from '../../core/services/pokemon.service';
+import { AppComponent } from '../../app.component';
 import { BigCardComponent } from '../big-card/big-card.component';
-import { MainComponent } from '../main/main.component';
 
 @Component({
   selector: 'app-cards',
@@ -14,17 +13,16 @@ import { MainComponent } from '../main/main.component';
 })
 export class CardsComponent {
 
-  main = inject(MainComponent);
   bigCard = inject(BigCardComponent);
 
 
-  constructor(public pokemonService: PokemonService) { }
+  constructor(public app: AppComponent) { }
 
 
   openBigPokedex(pokemon: any) {
     console.log('Selected Pokemon:', pokemon.name);
     this.bigCard.selectedPokemon = pokemon;
-    this.bigCard.pokemonList = this.pokemonService.pokemonSaved; // Ensure pokemonList is passed
+    this.bigCard.pokemonList = this.app.pokemonSaved;
     this.bigCard.openPokedex();
   }
 }

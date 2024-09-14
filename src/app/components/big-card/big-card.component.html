@@ -5,12 +5,8 @@
   [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
   [style]="{
     background: gradientColor(
-      pokemonService.getPokemonTypeColors(
-        selectedPokemon.details?.types[0].type.name
-      ),
-      pokemonService.getPokemonTypeColors(
-        selectedPokemon.details?.types[1]?.type.name
-      )
+      app.getPokemonTypeColors(selectedPokemon.details?.types[0].type.name),
+      app.getPokemonTypeColors(selectedPokemon.details?.types[1]?.type.name)
     ),
   }"
 >
@@ -38,16 +34,11 @@
   </div>
   <div class="pokemon-info-container">
     <div class="pokemon-info">
-      <div class="abilities">
-        <span class="abilities-title">Abilities:</span>
-        <span>{{ selectedPokemon?.details?.abilities[0].ability.name }}</span>
-        <span>{{ selectedPokemon?.details?.abilities[1]?.ability.name }}</span>
-      </div>
       <div class="pokemon-types">
         <span
           class="type"
           [style]="{
-            color: pokemonService.getPokemonTypeColors(
+            color: app.getPokemonTypeColors(
               selectedPokemon.details?.types[0].type.name
             ),
           }"
@@ -57,13 +48,26 @@
         <span
           class="type"
           [style]="{
-            color: pokemonService.getPokemonTypeColors(
+            color: app.getPokemonTypeColors(
               selectedPokemon.details?.types[1]?.type.name
             ),
           }"
         >
           {{ selectedPokemon?.details?.types[1]?.type.name }}
         </span>
+      </div>
+      <div class="evolves-from">
+        @if (selectedPokemon?.species?.evolves_from_species != null) {
+          <span class="evolves-from-title">Evolves from:</span>
+          <span
+            [style]="{
+              color: app.getPokemonTypeColors(
+                selectedPokemon.details?.types[0].type.name
+              ),
+            }"
+            >{{ selectedPokemon?.species?.evolves_from_species.name }}</span
+          >
+        }
       </div>
       <div class="height-weight">
         <div class="height">

@@ -3,24 +3,20 @@
     <app-search-result></app-search-result>
   </div>
   <button
-    [style.display]="
-      pokemonService.pokemonCount < pokemonService.pokemonMax ? 'block' : 'none'
-    "
-    (click)="loadMorePokemons()"
+    [style.display]="app.pokemonCount < app.pokemonMax ? 'block' : 'none'"
+    (click)="app.loadMorePokemons()"
   >
     Load more
   </button>
 
   <app-cards></app-cards>
-
-  <button (click)="loadMorePokemons()">Load more</button>
 </section>
 
 @if (bigCard.bigCardOpen && bigCard.selectedPokemon != null) {
   <app-big-card
     [style.display]="bigCard.bigCardOpen ? 'flex' : 'none'"
     [selectedPokemon]="bigCard.selectedPokemon"
-    [pokemonList]="pokemonService.pokemonSaved"
+    [pokemonList]="app.pokemonSaved"
     (click)="closePokedex()"
   ></app-big-card>
 }

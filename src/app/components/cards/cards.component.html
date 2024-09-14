@@ -1,37 +1,36 @@
-@for (pokemon of pokemonService.pokemonSaved; track $index) {
-  @if ($index < pokemonService.pokemonMax) {
+@for (pokemon of app.pokemonSaved; track $index) {
+  @if ($index < app.pokemonShown) {
     <div
       class="pokemon-card"
       [id]="'pokemonCardId-' + ($index + 1)"
-      (click)="openBigPokedex(pokemonService.pokemonSaved[$index])"
+      (click)="openBigPokedex(app.pokemonSaved[$index])"
       [style]="{
         boxShadow:
           '0px 0px 10px 10px' +
-          pokemonService.getPokemonTypeColors(
-            pokemonService.pokemonSaved[$index].details?.types[0].type.name
+          app.getPokemonTypeColors(
+            app.pokemonSaved[$index].details?.types[0].type.name
           ),
       }"
     >
       <div class="title-card">
         <span class="pokemon-name">
-          {{ pokemonService.pokemonSaved[$index].name }}
+          {{ app.pokemonSaved[$index].name }}
         </span>
         <span class="pokemon-id">
-          @if (pokemonService.pokemonSaved[$index].id < 10) {
-            {{ "000" + pokemonService.pokemonSaved[$index].id }}
-          } @else if (pokemonService.pokemonSaved[$index].id < 100) {
-            {{ "00" + pokemonService.pokemonSaved[$index].id }}
+          @if (app.pokemonSaved[$index].id < 10) {
+            {{ "000" + app.pokemonSaved[$index].id }}
+          } @else if (app.pokemonSaved[$index].id < 100) {
+            {{ "00" + app.pokemonSaved[$index].id }}
           } @else {
-            {{ pokemonService.pokemonSaved[$index].id }}
+            {{ app.pokemonSaved[$index].id }}
           }
         </span>
       </div>
       <img
         class="pokemon-image"
         [src]="
-          pokemonService.pokemonSaved[$index].details?.sprites?.other[
-            'official-artwork'
-          ].front_default
+          app.pokemonSaved[$index].details?.sprites?.other['official-artwork']
+            .front_default
         "
         alt=""
       />
@@ -42,28 +41,22 @@
             <span
               class="type"
               [style]="{
-                color: pokemonService.getPokemonTypeColors(
-                  pokemonService.pokemonSaved[$index].details?.types[0].type
-                    .name
+                color: app.getPokemonTypeColors(
+                  app.pokemonSaved[$index].details?.types[0].type.name
                 ),
               }"
             >
-              {{
-                pokemonService.pokemonSaved[$index].details?.types[0].type.name
-              }}
+              {{ app.pokemonSaved[$index].details?.types[0].type.name }}
             </span>
             <span
               class="type"
               [style]="{
-                color: pokemonService.getPokemonTypeColors(
-                  pokemonService.pokemonSaved[$index].details?.types[1]?.type
-                    .name
+                color: app.getPokemonTypeColors(
+                  app.pokemonSaved[$index].details?.types[1]?.type.name
                 ),
               }"
             >
-              {{
-                pokemonService.pokemonSaved[$index].details?.types[1]?.type.name
-              }}
+              {{ app.pokemonSaved[$index].details?.types[1]?.type.name }}
             </span>
           </div>
         </div>

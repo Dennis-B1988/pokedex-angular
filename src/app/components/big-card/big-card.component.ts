@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, inject, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { PokemonService } from '../../core/services/pokemon.service';
+import { AppComponent } from '../../app.component';
 import { StatsChartComponent } from '../stats-chart/stats-chart.component';
 
 @Component({
@@ -17,11 +17,10 @@ export class BigCardComponent implements OnChanges {
 
   @ViewChild('ctx', { static: false }) canvas!: ElementRef<HTMLCanvasElement>;
 
-
   bigCardOpen: boolean = false;
   isLoading = false;
 
-  constructor(private cdRef: ChangeDetectorRef, public pokemonService: PokemonService) { }
+  constructor(private cdRef: ChangeDetectorRef, public app: AppComponent) { }
 
 
   ngOnChanges(changes: SimpleChanges) {
@@ -70,7 +69,7 @@ export class BigCardComponent implements OnChanges {
 
 
   gradientColor(pokeonColorOne: string, pokeonColorTwo: string) {
-    if (this.pokemonService.getPokemonTypeColors(
+    if (this.app.getPokemonTypeColors(
       this.selectedPokemon.details?.types[1]?.type.name
     )) {
       return `linear-gradient(90deg, 
@@ -80,7 +79,7 @@ export class BigCardComponent implements OnChanges {
               ${pokeonColorOne} 90%, 
               ${pokeonColorTwo} 100%)`;
     } else {
-      return this.pokemonService.getPokemonTypeColors(
+      return this.app.getPokemonTypeColors(
         this.selectedPokemon.details?.types[0]?.type.name
       )
     }
