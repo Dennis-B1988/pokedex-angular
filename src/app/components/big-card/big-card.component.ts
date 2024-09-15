@@ -12,6 +12,8 @@ import { StatsChartComponent } from '../stats-chart/stats-chart.component';
 })
 export class BigCardComponent implements OnChanges {
 
+  app = inject(AppComponent);
+
   @Input() selectedPokemon: any;
   @Input() pokemonList!: any[];
 
@@ -20,7 +22,7 @@ export class BigCardComponent implements OnChanges {
   bigCardOpen: boolean = false;
   isLoading = false;
 
-  constructor(private cdRef: ChangeDetectorRef, public app: AppComponent) { }
+  constructor(private cdRef: ChangeDetectorRef) { }
 
 
   ngOnChanges(changes: SimpleChanges) {

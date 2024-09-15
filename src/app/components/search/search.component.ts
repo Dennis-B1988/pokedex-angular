@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PokemonService } from '../../core/services/pokemon.service';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-search',
@@ -9,28 +10,62 @@ import { PokemonService } from '../../core/services/pokemon.service';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
-  pokemonType: string = '';
-  searchTerm!: number;
+  app = inject(AppComponent);
 
-  constructor(private pokemonService: PokemonService) { }
+  search: string = '';
+  filteredPokemon: any[] = [];
+  private searchSubject = new Subject<string>();
+  private destroy$ = new Subject<void>();
+
+  constructor() { }
 
 
-  ngOnInit(): void { }
-
-
-  search() {
-
+  ngOnInit() {
+    this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
+      this.searchPokemon();
+    });
   }
 
-  // search() {
-  //   this.pokemonService.getPokemonId(this.searchTerm).subscribe({
-  //     next: (type: string) => {
-  //       this.pokemonType = type;
-  //       console.log(type);
-  //     },
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-  //   })
+  onSearchChange() {
+    this.searchSubject.next(this.search);
+  }
+
+  searchPokemon() {
+    if (this.search.length >= 3) {
+      this.filteredPokemon = this.app.pokemonSaved
+        .filter(pokemon => pokemon.name.toLowerCase().includes(this.search.toLowerCase()))
+        .slice(0, 10);
+      console.log(this.filteredPokemon);
+    } else {
+      this.filteredPokemon = [];
+    }
+  }
+
+  // searchPokemon() {
+  //   this.filteredPokemon = [];
+
+  //   if (this.search.length >= 3) {
+  //     let maximumDisplay = 0;
+  //     this.app.pokemonSaved.forEach((pokemon) => {
+  //       if (pokemon.name.toLowerCase().includes(this.search.toLowerCase())) {
+  //         if (maximumDisplay < 10) {
+  //           this.filteredPokemon.push(pokemon);
+  //           maximumDisplay++;
+  //           console.log(this.filteredPokemon);
+  //         }
+  //       }
+  //     })
+  //   }
   // }
 }

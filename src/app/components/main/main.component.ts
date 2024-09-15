@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { BigCardComponent } from '../big-card/big-card.component';
 import { CardsComponent } from '../cards/cards.component';
@@ -16,10 +16,12 @@ import { SearchComponent } from '../search/search.component';
 })
 export class MainComponent {
 
+  app = inject(AppComponent);
   bigCard = inject(BigCardComponent);
+  search = inject(SearchComponent);
 
 
-  constructor(public app: AppComponent) { }
+  constructor() { }
 
 
   closePokedex(): void {

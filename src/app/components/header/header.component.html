@@ -1,14 +1,17 @@
 <section class="header">
   <div class="header-content">
-    <a class="logo"
-      ><img src="./img/logo.png" alt="poketmonsters logo" class="logo"
-    /></a>
-    <a class="logo_small"
-      ><img
-        src="./img/logo-small.png"
-        alt="poketmonsters logo"
-        class="logo-small"
-    /></a>
+    @if (getScreenWidth >= 768) {
+      <a class="logo"
+        ><img src="./img/logo.png" alt="poketmonsters logo" class="logo"
+      /></a>
+    } @else {
+      <a class="logo-small"
+        ><img
+          src="./img/logo-small.png"
+          alt="poketmonsters logo"
+          class="logo-small"
+      /></a>
+    }
     <app-search></app-search>
   </div>
 </section>

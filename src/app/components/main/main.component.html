@@ -1,7 +1,4 @@
 <section class="main">
-  <div class="search">
-    <app-search-result></app-search-result>
-  </div>
   <button
     [style.display]="app.pokemonCount < app.pokemonMax ? 'block' : 'none'"
     (click)="app.loadMorePokemons()"
@@ -9,7 +6,15 @@
     Load more
   </button>
 
-  <app-cards></app-cards>
+  @if (!search.filteredPokemon.length) {
+    <div class="pokemon-cards">
+      <app-cards></app-cards>
+    </div>
+  } @else {
+    <div class="search-cards">
+      <app-search-result></app-search-result>
+    </div>
+  }
 </section>
 
 @if (bigCard.bigCardOpen && bigCard.selectedPokemon != null) {

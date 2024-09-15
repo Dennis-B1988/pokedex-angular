@@ -13,10 +13,11 @@ import { BigCardComponent } from '../big-card/big-card.component';
 })
 export class CardsComponent {
 
+  app = inject(AppComponent);
   bigCard = inject(BigCardComponent);
 
 
-  constructor(public app: AppComponent) { }
+  constructor() { }
 
 
   openBigPokedex(pokemon: any) {

@@ -13,6 +13,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
   provideRouter(routes),
   provideHttpClient(),
+    AppComponent,
     MainComponent,
     CardsComponent,
     BigCardComponent,

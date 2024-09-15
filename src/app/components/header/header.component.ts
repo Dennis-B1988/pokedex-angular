@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 
 @Component({
@@ -8,12 +8,24 @@ import { SearchComponent } from '../search/search.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit {
 
   search = inject(SearchComponent);
 
+  public getScreenWidth: any;
+
   constructor() { }
+
+
+  ngOnInit(): void {
+    this.getScreenWidth = window.innerWidth;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.getScreenWidth = window.innerWidth;
+  }
 
 
   searchPokemon() { }

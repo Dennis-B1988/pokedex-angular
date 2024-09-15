@@ -1,6 +1,7 @@
 <input
   type="text"
   class="search"
-  placeholder="Pokémon suchen..."
-  [(ngModel)]="searchTerm"
+  placeholder="Search Pokemon..."
+  [(ngModel)]="search"
+  (ngModelChange)="onSearchChange()"
 />
