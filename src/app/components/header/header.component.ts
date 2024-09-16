@@ -11,23 +11,26 @@ import { SearchService } from '../../core/services/search.service';
 })
 export class HeaderComponent implements OnInit {
 
-  searchService = inject(SearchService); // Inject the SearchService
+  searchService = inject(SearchService);
 
   public input: string = '';
   public getScreenWidth: any;
 
   constructor() { }
 
+
   ngOnInit(): void {
     this.getScreenWidth = window.innerWidth;
   }
+
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.getScreenWidth = window.innerWidth;
   }
 
+
   onSearchChange() {
-    this.searchService.setSearchTerm(this.input); // Update the search term in the service
+    this.searchService.setSearchTerm(this.input);
   }
 }

@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AppComponent } from '../../app.component';
@@ -18,6 +17,7 @@ export class CardsComponent {
 
 
   constructor() { }
+
 
   formatPokemonId(id: number): string {
     if (id < 10) return `000${id}`;
