@@ -1,13 +1,8 @@
-@for (pokemon of search.filteredPokemon; track pokemon.id) {
+<!-- @for (pokemon of filteredPokemon; track trackByPokemonId) {
   <div
     class="pokemon-card"
     [id]="'pokemonCardId-' + pokemon.id"
     (click)="card.openBigPokedex(pokemon)"
-    [style]="{
-      boxShadow:
-        '0px 0px 10px 10px' +
-        app.getPokemonTypeColors(pokemon.details?.types[0].type.name),
-    }"
   >
     <div class="title-card">
       <span class="pokemon-name">
@@ -56,4 +51,4 @@
       </div>
     </div>
   </div>
-}
+} -->

@@ -1,32 +1,33 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
-import { SearchComponent } from '../search/search.component';
+import { FormsModule } from '@angular/forms';
+import { SearchService } from '../../core/services/search.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [SearchComponent],
+  imports: [FormsModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  search = inject(SearchComponent);
+  searchService = inject(SearchService); // Inject the SearchService
 
+  public input: string = '';
   public getScreenWidth: any;
 
   constructor() { }
 
-
   ngOnInit(): void {
     this.getScreenWidth = window.innerWidth;
   }
-
 
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.getScreenWidth = window.innerWidth;
   }
 
-
-  searchPokemon() { }
+  onSearchChange() {
+    this.searchService.setSearchTerm(this.input); // Update the search term in the service
+  }
 }

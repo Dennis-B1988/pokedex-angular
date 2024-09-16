@@ -17,13 +17,7 @@
           {{ app.pokemonSaved[$index].name }}
         </span>
         <span class="pokemon-id">
-          @if (app.pokemonSaved[$index].id < 10) {
-            {{ "000" + app.pokemonSaved[$index].id }}
-          } @else if (app.pokemonSaved[$index].id < 100) {
-            {{ "00" + app.pokemonSaved[$index].id }}
-          } @else {
-            {{ app.pokemonSaved[$index].id }}
-          }
+          {{ formatPokemonId(app.pokemonSaved[$index].id) }}
         </span>
       </div>
       <img

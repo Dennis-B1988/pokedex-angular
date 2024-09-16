@@ -1,34 +1,35 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { AppComponent } from '../../app.component';
+import { SearchService } from '../../core/services/search.service';
+import { CardsComponent } from '../cards/cards.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.scss'
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
   app = inject(AppComponent);
+  card = inject(CardsComponent);
+  searchService = inject(SearchService);
 
-  search: string = '';
-  filteredPokemon: any[] = [];
-  private searchSubject = new Subject<string>();
+  @Input() filteredPokemon: any[] = [];
+
   private destroy$ = new Subject<void>();
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
 
   ngOnInit() {
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
+    this.searchService.search$.pipe(
       takeUntil(this.destroy$)
-    ).subscribe(() => {
-      this.searchPokemon();
+    ).subscribe(searchTerm => {
+      this.searchPokemon(searchTerm);
     });
   }
 
@@ -37,20 +38,30 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  onSearchChange() {
-    this.searchSubject.next(this.search);
-  }
-
-  searchPokemon() {
-    if (this.search.length >= 3) {
-      this.filteredPokemon = this.app.pokemonSaved
-        .filter(pokemon => pokemon.name.toLowerCase().includes(this.search.toLowerCase()))
+  searchPokemon(searchTerm: string) {
+    if (searchTerm.length >= 3) {
+      const filtered = this.app.pokemonSaved
+        .filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .slice(0, 10);
-      console.log(this.filteredPokemon);
+      this.searchService.setFilteredPokemon(filtered);
+      // this.cdr.detectChanges();
+      console.log('Filtered Pokemon:', filtered);
     } else {
-      this.filteredPokemon = [];
+      this.searchService.setFilteredPokemon([]);
+      // this.cdr.detectChanges();
     }
   }
+
+  trackByPokemonId(index: number, pokemon: any): number {
+    return pokemon.id; // Or pokemon.id to track by ID
+  }
+
+  formatPokemonId(id: number): string {
+    if (id < 10) return `000${id}`;
+    if (id < 100) return `00${id}`;
+    return id.toString();
+  }
+
 
   // searchPokemon() {
   //   this.filteredPokemon = [];

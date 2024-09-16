@@ -12,6 +12,12 @@
           class="logo-small"
       /></a>
     }
-    <app-search></app-search>
+    <input
+      type="text"
+      class="search"
+      placeholder="Search Pokemon..."
+      [(ngModel)]="input"
+      (ngModelChange)="onSearchChange()"
+    />
   </div>
 </section>

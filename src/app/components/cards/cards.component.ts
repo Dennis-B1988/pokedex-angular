@@ -19,6 +19,12 @@ export class CardsComponent {
 
   constructor() { }
 
+  formatPokemonId(id: number): string {
+    if (id < 10) return `000${id}`;
+    if (id < 100) return `00${id}`;
+    return id.toString();
+  }
+
 
   openBigPokedex(pokemon: any) {
     console.log('Selected Pokemon:', pokemon.name);

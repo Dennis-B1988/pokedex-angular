@@ -1,8 +1,7 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { HeaderComponent } from "./components/header/header.component";
-import { MainComponent } from './components/main/main.component';
 import { PokeAPI, pokemonTypeColors, Results } from './core/models/pokemon.interface';
 import { PokemonService } from './core/services/pokemon.service';
 

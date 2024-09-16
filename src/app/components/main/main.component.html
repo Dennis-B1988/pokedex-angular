@@ -6,15 +6,33 @@
     Load more
   </button>
 
-  @if (!search.filteredPokemon.length) {
+  <!-- @if (filteredPokemon.length == 0) {
     <div class="pokemon-cards">
+      <p>Filtered Pokemon Count: {{ filteredPokemon.length }}</p>
       <app-cards></app-cards>
     </div>
-  } @else {
-    <div class="search-cards">
-      <app-search-result></app-search-result>
+  } @else { -->
+  <!-- <div class="search-cards">
+    <p>Filtered Pokemon Count: {{ filteredPokemon.length }}</p>
+    <app-search></app-search>
+  </div> -->
+  <!-- } -->
+
+  <ng-container *ngIf="filteredPokemon$ | async as filteredPokemon">
+    <div *ngIf="filteredPokemon.length === 0">
+      <div class="pokemon-cards">
+        <p>Filtered Pokemon Count: {{ filteredPokemon.length }}</p>
+        <app-cards></app-cards>
+      </div>
     </div>
-  }
+
+    <div *ngIf="filteredPokemon.length > 0">
+      <div class="search-cards">
+        <p>Filtered Pokemon Count: {{ filteredPokemon.length }}</p>
+        <app-search></app-search>
+      </div>
+    </div>
+  </ng-container>
 </section>
 
 @if (bigCard.bigCardOpen && bigCard.selectedPokemon != null) {
