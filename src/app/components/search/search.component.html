@@ -1,9 +1,13 @@
-<!-- @for (pokemon of filteredPokemon; track pokemon.id) { -->
-<div *ngFor="let pokemon of filteredPokemon; trackBy: trackByPokemonId">
+@for (pokemon of filteredPokemon; track pokemon.id) {
   <div
     class="pokemon-card"
     [id]="'pokemonCardId-' + pokemon.id"
     (click)="card.openBigPokedex(pokemon)"
+    [style]="{
+      boxShadow:
+        '0px 0px 10px 10px' +
+        app.getPokemonTypeColors(pokemon.details?.types[0].type.name),
+    }"
   >
     <div class="title-card">
       <span class="pokemon-name">
@@ -46,5 +50,4 @@
       </div>
     </div>
   </div>
-</div>
-<!-- } -->
+}

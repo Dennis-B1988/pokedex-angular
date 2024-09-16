@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 export class SearchService {
+
     private searchSubject = new BehaviorSubject<string>('');
     search$ = this.searchSubject.asObservable();
 
@@ -19,5 +20,6 @@ export class SearchService {
 
     setFilteredPokemon(pokemonList: any[]) {
         this.filteredPokemonSubject.next(pokemonList);
+        console.log('Filtered Pokemon:', pokemonList);
     }
 }

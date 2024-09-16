@@ -18,7 +18,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   card = inject(CardsComponent);
   searchService = inject(SearchService);
 
-  @Input() filteredPokemon: any[] = [];
+  // @Input() filteredPokemon: any[] = [];
+  filteredPokemon: any[] = [];
 
   private destroy$ = new Subject<void>();
 
@@ -26,9 +27,18 @@ export class SearchComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    // Subscribe to the filteredPokemon$ observable
+    this.searchService.filteredPokemon$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((pokemonList) => {
+      this.filteredPokemon = pokemonList;  // Update the local array
+      this.cdr.detectChanges();  // Manually trigger change detection if necessary
+    });
+
+    // Optionally, subscribe to the search term observable to trigger filtering
     this.searchService.search$.pipe(
       takeUntil(this.destroy$)
-    ).subscribe(searchTerm => {
+    ).subscribe((searchTerm) => {
       this.searchPokemon(searchTerm);
     });
   }
@@ -43,12 +53,11 @@ export class SearchComponent implements OnInit, OnDestroy {
       const filtered = this.app.pokemonSaved
         .filter(pokemon => pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .slice(0, 10);
-      this.searchService.setFilteredPokemon(filtered);
-      // this.cdr.detectChanges();
-      console.log('Filtered Pokemon:', filtered);
+      this.searchService.setFilteredPokemon(filtered);  // Push to the service
+      console.log(this.filteredPokemon);
     } else {
-      this.searchService.setFilteredPokemon([]);
-      // this.cdr.detectChanges();
+      this.searchService.setFilteredPokemon([]);  // Clear the filtered list
+      console.log(this.filteredPokemon);
     }
   }
 

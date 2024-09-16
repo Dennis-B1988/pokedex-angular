@@ -1,30 +1,27 @@
-@for (pokemon of app.pokemonSaved; track $index) {
+@for (pokemon of app.pokemonSaved; track pokemon.id) {
   @if ($index < app.pokemonShown) {
     <div
       class="pokemon-card"
       [id]="'pokemonCardId-' + ($index + 1)"
-      (click)="openBigPokedex(app.pokemonSaved[$index])"
+      (click)="openBigPokedex(pokemon)"
       [style]="{
         boxShadow:
           '0px 0px 10px 10px' +
-          app.getPokemonTypeColors(
-            app.pokemonSaved[$index].details?.types[0].type.name
-          ),
+          app.getPokemonTypeColors(pokemon.details?.types[0].type.name),
       }"
     >
       <div class="title-card">
         <span class="pokemon-name">
-          {{ app.pokemonSaved[$index].name }}
+          {{ pokemon.name }}
         </span>
         <span class="pokemon-id">
-          {{ formatPokemonId(app.pokemonSaved[$index].id) }}
+          {{ formatPokemonId(pokemon.id) }}
         </span>
       </div>
       <img
         class="pokemon-image"
         [src]="
-          app.pokemonSaved[$index].details?.sprites?.other['official-artwork']
-            .front_default
+          pokemon.details?.sprites?.other['official-artwork'].front_default
         "
         alt=""
       />
@@ -36,21 +33,21 @@
               class="type"
               [style]="{
                 color: app.getPokemonTypeColors(
-                  app.pokemonSaved[$index].details?.types[0].type.name
+                  pokemon.details?.types[0].type.name
                 ),
               }"
             >
-              {{ app.pokemonSaved[$index].details?.types[0].type.name }}
+              {{ pokemon.details?.types[0].type.name }}
             </span>
             <span
               class="type"
               [style]="{
                 color: app.getPokemonTypeColors(
-                  app.pokemonSaved[$index].details?.types[1]?.type.name
+                  pokemon.details?.types[1]?.type.name
                 ),
               }"
             >
-              {{ app.pokemonSaved[$index].details?.types[1]?.type.name }}
+              {{ pokemon.details?.types[1]?.type.name }}
             </span>
           </div>
         </div>

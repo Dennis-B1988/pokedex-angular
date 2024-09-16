@@ -15,23 +15,26 @@ import { SearchComponent } from '../search/search.component';
   imports: [HeaderComponent, CardsComponent, BigCardComponent, SearchComponent, SearchResultComponent, CommonModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
-  changeDetection: ChangeDetectionStrategy.Default
+  // changeDetection: ChangeDetectionStrategy.Default
 })
 export class MainComponent implements OnInit {
 
   app = inject(AppComponent);
   searchService = inject(SearchService);
   bigCard = inject(BigCardComponent);
+  search = inject(SearchComponent);
 
-  // filteredPokemon: any[] = [];
-  filteredPokemon$ = this.searchService.filteredPokemon$;
+  filteredPokemon: any[] = [];
+  // filteredPokemon$ = this.searchService.filteredPokemon$;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
 
   ngOnInit(): void {
     this.searchService.filteredPokemon$.subscribe(filtered => {
-      console.log('MainComponent - Filtered Pokemon:', filtered);
+      this.filteredPokemon = filtered;
+      console.log('MainComponent - Filtered Pokemon:', this.filteredPokemon);
+      this.cdr.detectChanges();
     });
   }
 
