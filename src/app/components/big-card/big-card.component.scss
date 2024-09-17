@@ -1,6 +1,6 @@
 .big-card {
-    height: 60%;
-    width: 60%;
+    height: 80%;
+    width: 70%;
     border-radius: .625rem;
     flex-direction: column;
     justify-content: space-between;
@@ -38,7 +38,7 @@
 
 .pokemon-id {
     width: 25%;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -135,5 +135,25 @@
         &:hover {
             background-color: #ffffff;
         }
+    }
+}
+
+@media (max-width: 768px) {
+    .big-card {
+        height: 85%;
+        width: 85%;
+    }
+}
+
+@media (max-width: 620px) {
+    .big-card {
+        height: 65%;
+        width: 95%;
+    }
+}
+
+@media (max-width: 500px) {
+    .pokemon-image {
+        height: 30%;
     }
 }

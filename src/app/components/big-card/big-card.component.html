@@ -1,7 +1,6 @@
 <div
   class="big-card"
   [id]="selectedPokemon?.id"
-  (click)="$event.stopPropagation()"
   [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
   [style]="{
     background: gradientColor(
