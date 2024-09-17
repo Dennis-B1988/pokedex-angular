@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   pokemonMax = 1025;
 
   pokemonSaved: any[] = [];
+  loading: boolean = false;
+  loadingTime: number = 0;
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -32,11 +34,19 @@ export class AppComponent implements OnInit {
 
 
   loadAllPokemons(): void {
+    this.loading = true;  // Start loading
+    const startTime = performance.now();
+
     this.pokemonService.fetchPokemon().subscribe((data: PokeAPI) => {
       this.pokemonService.pokemons = data;
       this.processPokemonResults();
 
       console.log(this.pokemonSaved);
+
+      const endTime = performance.now();
+      this.loadingTime = endTime - startTime;  // Calculate loading time
+      this.loading = false;  // Stop loading
+      console.log(`Data loading completed in ${this.loadingTime}ms`);
     });
   }
 

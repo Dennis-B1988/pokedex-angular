@@ -1,10 +1,7 @@
 <section class="main">
-  <button
-    [style.display]="app.pokemonCount < app.pokemonMax ? 'block' : 'none'"
-    (click)="app.loadMorePokemons()"
-  >
-    Load more
-  </button>
+  <app-loading-spinner
+    [style.display]="app.loading ? 'flex' : 'none'"
+  ></app-loading-spinner>
 
   <div
     class="pokemon-cards"
