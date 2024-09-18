@@ -25,6 +25,17 @@ export class BigCardComponent implements OnChanges {
   constructor(private cdRef: ChangeDetectorRef) { }
 
 
+  /**
+   * Called when the component's inputs change.
+   *
+   * Checks if either the pokemonList or selectedPokemon inputs have changed.
+   * If either has changed, it calls ChangeDetectorRef.detectChanges() to
+   * trigger a change detection cycle, which will update the component's
+   * template with the new values.
+   *
+   * @param changes The changes object as passed to the ngOnChanges lifecycle
+   *                hook.
+   */
   ngOnChanges(changes: SimpleChanges) {
     if (changes['pokemonList'] || changes['selectedPokemon']) {
       this.cdRef.detectChanges();
@@ -32,22 +43,28 @@ export class BigCardComponent implements OnChanges {
   }
 
 
+  /**
+   * Opens the big card by setting bigCardOpen to true and changing the
+   * document body's overflow style to "hidden" to prevent scrolling.
+   */
   openPokedex() {
     this.bigCardOpen = true;
-    console.log('bigCardOpen: ', this.bigCardOpen);
     document.body.style.overflow = 'hidden';
-    console.log('Selected Pokemon in Big Card:', this.selectedPokemon);
-    document.body.style.overflow = 'auto';
-    this.cdRef.detectChanges();
   }
 
 
+  /**
+   * Switches to the next Pokemon in the list by setting selectedPokemon to the
+   * next Pokemon in the list and setting isLoading to true. After 300ms, sets
+   * isLoading to false.
+   *
+   * If isLoading is true, does nothing.
+   */
   nextPokemon() {
     if (!this.isLoading) {
       const currentIndex = this.pokemonList.findIndex(pokemon => pokemon.id === this.selectedPokemon.id);
       const nextIndex = (currentIndex + 1) % this.pokemonList.length;
       this.selectedPokemon = this.pokemonList[nextIndex];
-      console.log('PokemonList: ', this.pokemonList[nextIndex]);
       this.isLoading = true;
       setTimeout(() => {
         this.isLoading = false;
@@ -56,6 +73,13 @@ export class BigCardComponent implements OnChanges {
   }
 
 
+  /**
+   * Switches to the previous Pokemon in the list by setting selectedPokemon to the
+   * previous Pokemon in the list and setting isLoading to true. After 300ms, sets
+   * isLoading to false.
+   *
+   * If isLoading is true, does nothing.
+   */
   previousPokemon() {
     if (!this.isLoading) {
       const currentIndex = this.pokemonList.findIndex(pokemon => pokemon.id === this.selectedPokemon.id);
@@ -70,6 +94,17 @@ export class BigCardComponent implements OnChanges {
   }
 
 
+  /**
+   * Returns a CSS linear gradient string based on the Pokemon's types.
+   *
+   * If the Pokemon has two types, the gradient will go from the first type's color
+   * to the second type's color. If the Pokemon only has one type, the gradient will
+   * be a solid color of that type.
+   *
+   * @param pokeonColorOne The color of the Pokemon's first type.
+   * @param pokeonColorTwo The color of the Pokemon's second type.
+   * @returns A CSS linear gradient string.
+   */
   gradientColor(pokeonColorOne: string, pokeonColorTwo: string) {
     if (this.app.getPokemonTypeColors(
       this.selectedPokemon.details?.types[1]?.type.name
