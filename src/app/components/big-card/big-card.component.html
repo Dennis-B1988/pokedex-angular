@@ -2,78 +2,48 @@
   class="big-card"
   [id]="selectedPokemon?.id"
   [ngClass]="{ 'is-visible': !bigCardOpen || !selectedPokemon }"
-  [style]="{
-    background: gradientColor(
-      app.getPokemonTypeColors(selectedPokemon.details?.types[0].type.name),
-      app.getPokemonTypeColors(selectedPokemon.details?.types[1]?.type.name)
-    ),
-  }"
+  [style.background]="getGradientBackground()"
 >
   <div class="big-card-top">
     <span class="placeholder"></span>
     <span class="pokemon-name">{{ selectedPokemon?.name }}</span>
     <span class="pokemon-id">
-      @if (selectedPokemon.id < 10) {
-        {{ "000" + selectedPokemon.id }}
-      } @else if (selectedPokemon.id < 100) {
-        {{ "00" + selectedPokemon.id }}
-      } @else {
-        {{ selectedPokemon.id }}
-      }
+      {{ formatPokemonId(selectedPokemon?.id) }}
     </span>
   </div>
   <div class="pokemon-image">
-    <img
-      [src]="
-        selectedPokemon?.details?.sprites?.other['official-artwork']
-          .front_default
-      "
-      alt="{{ selectedPokemon?.name }}"
-    />
+    <img [src]="getPokemonImage()" alt="{{ selectedPokemon?.name }}" />
   </div>
   <div class="pokemon-info-container">
     <div class="pokemon-info">
       <div class="pokemon-types">
-        <span
-          class="type"
-          [style]="{
-            color: app.getPokemonTypeColors(
-              selectedPokemon.details?.types[0].type.name
-            ),
-          }"
-        >
-          {{ selectedPokemon?.details?.types[0].type.name }}
-        </span>
-        <span
-          class="type"
-          [style]="{
-            color: app.getPokemonTypeColors(
-              selectedPokemon.details?.types[1]?.type.name
-            ),
-          }"
-        >
-          {{ selectedPokemon?.details?.types[1]?.type.name }}
-        </span>
+        @for (type of selectedPokemon?.details?.types; track $index) {
+          <span
+            class="type"
+            [style.color]="getPokemonTypeColor(type?.type?.name)"
+          >
+            {{ type?.type?.name }}
+          </span>
+        }
       </div>
       <div class="evolves-from">
         @if (selectedPokemon?.species?.evolves_from_species != null) {
           <span class="evolves-from-title">Evolves from:</span>
-          <span
-            [style]="{
-              color: app.getPokemonTypeColors(
-                selectedPokemon.details?.types[0].type.name
-              ),
-            }"
-            >{{ selectedPokemon?.species?.evolves_from_species.name }}</span
-          >
+          <span [style.color]="getPrimaryTypeColor()">{{
+            selectedPokemon?.species?.evolves_from_species.name
+          }}</span>
         }
       </div>
       <div class="height-weight">
         <div class="height">
-          <span>{{ selectedPokemon?.details?.height / 10 + " m" }}</span>
+          <span>{{
+            getFormattedHeight(selectedPokemon?.details?.height)
+          }}</span>
         </div>
         <div class="weight">
-          <span>{{ selectedPokemon?.details?.weight / 10 + " kg" }}</span>
+          <span>{{
+            getFormattedWeight(selectedPokemon?.details?.weight)
+          }}</span>
         </div>
       </div>
     </div>

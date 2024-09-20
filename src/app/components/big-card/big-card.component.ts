@@ -86,6 +86,18 @@ export class BigCardComponent implements OnChanges {
   /**
    * Calculates the gradient background color based on the Pokémon's types.
    * If two types are present, it returns a linear gradient; otherwise, it returns a solid color.
+   * @returns A CSS linear gradient string or solid color.
+   */
+  getGradientBackground(): string {
+    const typeOne = this.app.getPokemonTypeColors(this.selectedPokemon?.details?.types[0]?.type?.name);
+    const typeTwo = this.app.getPokemonTypeColors(this.selectedPokemon?.details?.types[1]?.type?.name);
+    return this.gradientColor(typeOne, typeTwo);
+  }
+
+
+  /**
+   * Calculates the gradient background color based on the Pokémon's types.
+   * If two types are present, it returns a linear gradient; otherwise, it returns a solid color.
    * @param primaryColor - Primary type color.
    * @param secondaryColor - Secondary type color.
    * @returns A CSS linear gradient string or solid color.
@@ -106,5 +118,66 @@ export class BigCardComponent implements OnChanges {
    */
   private createGradient(color1: string, color2: string): string {
     return `linear-gradient(90deg, ${color2} 0%, ${color1} 10%, ${color1} 50%, ${color1} 90%, ${color2} 100%)`;
+  }
+
+
+  /**
+   * Formats a Pokemon's ID to be 3 digits.
+   * @param id - The Pokemon's ID.
+   * @returns The Pokemon's ID as a 3-digit string.
+   */
+  formatPokemonId(id: number): string {
+    if (id < 10) return `000${id}`;
+    if (id < 100) return `00${id}`;
+    return id.toString();
+  }
+
+
+  /**
+   * Returns the URL of the Pokémon's official artwork image.
+   * If the image is not available, returns an empty string.
+   * @returns The URL of the Pokémon's official artwork image.
+   */
+  getPokemonImage(): string {
+    return this.selectedPokemon?.details?.sprites?.other['official-artwork'].front_default;
+  }
+
+
+  /**
+   * Returns the color associated with the given Pokémon type.
+   * @param typeName - Name of the Pokémon type.
+   * @returns The color associated with the given type.
+   */
+  getPokemonTypeColor(typeName: string): string {
+    return this.app.getPokemonTypeColors(typeName);
+  }
+
+
+  /**
+   * Returns the color associated with the first type of the selected Pokémon.
+   * @returns The color associated with the first type of the selected Pokémon.
+   */
+  getPrimaryTypeColor(): string {
+    return this.app.getPokemonTypeColors(this.selectedPokemon?.details?.types[0]?.type?.name);
+  }
+
+
+  /**
+   * Formats a Pokemon's height in decimeters to be in meters with 1 decimal place.
+   * @param height - The Pokemon's height in decimeters.
+   * @returns The Pokemon's height in meters as a string with 1 decimal place.
+   */
+  getFormattedHeight(height: number): string {
+    return height ? `${height / 10} m` : '';
+  }
+
+
+  /**
+   * Formats a Pokemon's weight in hectograms to be in kilograms with 1 decimal place.
+   * @param weight - The Pokemon's weight in hectograms.
+   * @returns The Pokemon's weight in kilograms as a string with 1 decimal place.
+   */
+  getFormattedWeight(weight: number): string {
+    return weight ? `${weight / 10} kg` : '';
   }
 }
