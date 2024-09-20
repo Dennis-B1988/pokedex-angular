@@ -26,17 +26,10 @@ export class BigCardComponent implements OnChanges {
 
 
   /**
-   * Called when the component's inputs change.
-   *
-   * Checks if either the pokemonList or selectedPokemon inputs have changed.
-   * If either has changed, it calls ChangeDetectorRef.detectChanges() to
-   * trigger a change detection cycle, which will update the component's
-   * template with the new values.
-   *
-   * @param changes The changes object as passed to the ngOnChanges lifecycle
-   *                hook.
+   * Detects changes in `pokemonList` or `selectedPokemon` inputs and triggers change detection.
+   * @param changes - Object containing the changes to the inputs.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['pokemonList'] || changes['selectedPokemon']) {
       this.cdRef.detectChanges();
     }
@@ -44,81 +37,74 @@ export class BigCardComponent implements OnChanges {
 
 
   /**
-   * Opens the big card by setting bigCardOpen to true and changing the
-   * document body's overflow style to "hidden" to prevent scrolling.
+   * Opens the big card, preventing the document body from scrolling.
    */
-  openPokedex() {
+  openPokedex(): void {
     this.bigCardOpen = true;
     document.body.style.overflow = 'hidden';
   }
 
 
   /**
-   * Switches to the next Pokemon in the list by setting selectedPokemon to the
-   * next Pokemon in the list and setting isLoading to true. After 300ms, sets
-   * isLoading to false.
-   *
-   * If isLoading is true, does nothing.
+   * Switches to the next Pokémon in the list, with a short delay to simulate loading.
+   * Prevents switching while already loading.
    */
-  nextPokemon() {
+  nextPokemon(): void {
     if (!this.isLoading) {
-      const currentIndex = this.pokemonList.findIndex(pokemon => pokemon.id === this.selectedPokemon.id);
-      const nextIndex = (currentIndex + 1) % this.pokemonList.length;
-      this.selectedPokemon = this.pokemonList[nextIndex];
-      this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 300);
+      this.changePokemon(1);
     }
   }
 
 
   /**
-   * Switches to the previous Pokemon in the list by setting selectedPokemon to the
-   * previous Pokemon in the list and setting isLoading to true. After 300ms, sets
-   * isLoading to false.
-   *
-   * If isLoading is true, does nothing.
+   * Switches to the previous Pokémon in the list, with a short delay to simulate loading.
+   * Prevents switching while already loading.
    */
-  previousPokemon() {
+  previousPokemon(): void {
     if (!this.isLoading) {
-      const currentIndex = this.pokemonList.findIndex(pokemon => pokemon.id === this.selectedPokemon.id);
-      const previousIndex = (currentIndex - 1 + this.pokemonList.length) % this.pokemonList.length;
-      this.selectedPokemon = this.pokemonList[previousIndex];
-      console.log('PokemonList: ', this.pokemonList[previousIndex]);
-      this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 300);
+      this.changePokemon(-1);
     }
   }
 
 
   /**
-   * Returns a CSS linear gradient string based on the Pokemon's types.
-   *
-   * If the Pokemon has two types, the gradient will go from the first type's color
-   * to the second type's color. If the Pokemon only has one type, the gradient will
-   * be a solid color of that type.
-   *
-   * @param pokeonColorOne The color of the Pokemon's first type.
-   * @param pokeonColorTwo The color of the Pokemon's second type.
+   * Changes the selected Pokémon by shifting the index within the list.
+   * Adds loading delay before allowing further changes.
+   * @param direction - +1 for next, -1 for previous.
+   */
+  private changePokemon(direction: number): void {
+    const currentIndex = this.pokemonList.findIndex(pokemon => pokemon.id === this.selectedPokemon?.id);
+    const newIndex = (currentIndex + direction + this.pokemonList.length) % this.pokemonList.length;
+    this.selectedPokemon = this.pokemonList[newIndex];
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 300);
+  }
+
+
+  /**
+   * Calculates the gradient background color based on the Pokémon's types.
+   * If two types are present, it returns a linear gradient; otherwise, it returns a solid color.
+   * @param primaryColor - Primary type color.
+   * @param secondaryColor - Secondary type color.
+   * @returns A CSS linear gradient string or solid color.
+   */
+  gradientColor(primaryColor: string, secondaryColor: string): string {
+    const hasTwoTypes = !!this.selectedPokemon?.details?.types[1]?.type.name;
+    return hasTwoTypes
+      ? this.createGradient(primaryColor, secondaryColor)
+      : this.app.getPokemonTypeColors(this.selectedPokemon?.details?.types[0]?.type.name);
+  }
+
+
+  /**
+   * Helper method to create a linear gradient string.
+   * @param color1 - First color in the gradient.
+   * @param color2 - Second color in the gradient.
    * @returns A CSS linear gradient string.
    */
-  gradientColor(pokeonColorOne: string, pokeonColorTwo: string) {
-    if (this.app.getPokemonTypeColors(
-      this.selectedPokemon.details?.types[1]?.type.name
-    )) {
-      return `linear-gradient(90deg, 
-              ${pokeonColorTwo} 0%, 
-              ${pokeonColorOne} 10%, 
-              ${pokeonColorOne} 50%, 
-              ${pokeonColorOne} 90%, 
-              ${pokeonColorTwo} 100%)`;
-    } else {
-      return this.app.getPokemonTypeColors(
-        this.selectedPokemon.details?.types[0]?.type.name
-      )
-    }
+  private createGradient(color1: string, color2: string): string {
+    return `linear-gradient(90deg, ${color2} 0%, ${color1} 10%, ${color1} 50%, ${color1} 90%, ${color2} 100%)`;
   }
 }
