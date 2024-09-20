@@ -2,5 +2,9 @@
 
 <section #cardContainer class="card-container" (scroll)="onScroll()">
   <router-outlet />
-  <div class="scroll-to-top" (click)="scrollToTop()">Back to Top</div>
+  @if (showScrollToTop) {
+    <div class="scroll-to-top" (click)="scrollToTop()">
+      <img src="./img/arrow-up.png" alt="scroll to top" />
+    </div>
+  }
 </section>

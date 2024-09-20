@@ -119,12 +119,12 @@
     gap: 1.875rem;
 
     button {
-        height: 3.125rem;
-        width: 3.125rem;
+        height: 5.125rem;
+        width: 5.125rem;
         border: none;
         border-radius: 50%;
         background-color: #ffffff7e;
-        font-size: 3.5rem;
+        font-size: 5.5rem;
         font-weight: 700;
         display: flex;
         justify-content: center;
@@ -137,16 +137,14 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .big-card {
-        height: 85%;
         width: 85%;
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 768px) {
     .big-card {
-        height: 65%;
         width: 95%;
     }
 }

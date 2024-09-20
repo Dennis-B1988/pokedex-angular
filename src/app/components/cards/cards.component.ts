@@ -15,7 +15,6 @@ export class CardsComponent {
   bigCard = inject(BigCardComponent);
 
   pokemonSaved = this.app.pokemonSaved;
-  pokemonShown = this.app.pokemonShown;
 
 
   /**

@@ -1,5 +1,5 @@
 @for (pokemon of pokemonSaved; track pokemon.id) {
-  @if ($index < pokemonShown) {
+  @if ($index < app.pokemonShown) {
     <div
       class="pokemon-card"
       [id]="'pokemonCardId-' + ($index + 1)"

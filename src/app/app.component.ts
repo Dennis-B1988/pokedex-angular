@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
   loading: boolean = false;
   loadingTime: number = 0;
 
+  showScrollToTop: boolean = false;
+
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -154,14 +156,23 @@ export class AppComponent implements OnInit {
   }
 
 
+
   /**
-   * Handles scroll events and loads more Pokemons if necessary.
+   * Checks if the user has scrolled to the bottom of the card container
+   * and if so, loads more Pokemons. Also shows/hides the "scroll to top" button
+   * based on the scroll position.
+   * @returns {void}
    */
   onScroll(): void {
     const scrollContainer = this.cardContainer.nativeElement;
+    const scrollTop = scrollContainer.scrollTop;
     const shouldLoadMore = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight;
+
+    this.showScrollToTop = scrollTop > 200;
+
     if (shouldLoadMore) {
       this.loadMorePokemons();
+      console.log('Pokemon shown: ', this.pokemonShown, 'Pokemon max: ', this.pokemonMax, 'Pokemon count: ', this.pokemonCount);
     }
   }
 

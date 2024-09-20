@@ -38,21 +38,10 @@ export class StatsChartComponent implements OnChanges {
 
 
   /**
-   * Update the canvas dimensions and set up the Pokemon chart.
+   * Set up the Pokemon chart.
    */
   private updateChart(): void {
-    this.setCanvasDimensions();
     this.createOrUpdateChart();
-  }
-
-
-  /**
-   * Set canvas dimensions to fit the chart.
-   */
-  private setCanvasDimensions(): void {
-    const canvas = this.ctx.nativeElement;
-    canvas.width = 350;
-    canvas.height = 250;
   }
 
 
