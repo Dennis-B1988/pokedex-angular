@@ -148,13 +148,13 @@ export class AppComponent implements OnInit {
     this.loading = true;
   }
 
+
   /**
    * Helper method to mark the loading state as false.
    */
   private finishLoading(): void {
     this.loading = false;
   }
-
 
 
   /**
