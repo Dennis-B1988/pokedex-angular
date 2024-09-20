@@ -14,8 +14,19 @@ export class CardsComponent {
   app = inject(AppComponent);
   bigCard = inject(BigCardComponent);
 
+  pokemonSaved = this.app.pokemonSaved;
+  pokemonShown = this.app.pokemonShown;
 
-  constructor() { }
+
+  /**
+   * Opens the big card with the selected Pokemon and its list
+   * @param pokemon - The selected Pokemon
+   */
+  openBigPokedex(pokemon: any) {
+    this.bigCard.selectedPokemon = pokemon;
+    this.bigCard.pokemonList = this.app.pokemonSaved;
+    this.bigCard.openPokedex();
+  }
 
 
   /**
@@ -31,12 +42,11 @@ export class CardsComponent {
 
 
   /**
-   * Opens the big card with the selected Pokemon and its list
-   * @param pokemon - The selected Pokemon
+   * Returns the color associated with the given Pokémon type.
+   * @param typeName - Name of the Pokémon type.
+   * @returns The color associated with the given type.
    */
-  openBigPokedex(pokemon: any) {
-    this.bigCard.selectedPokemon = pokemon;
-    this.bigCard.pokemonList = this.app.pokemonSaved;
-    this.bigCard.openPokedex();
+  getPokemonTypeColor(typeName: string): string {
+    return this.app.getPokemonTypeColors(typeName);
   }
 }

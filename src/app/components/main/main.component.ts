@@ -24,20 +24,24 @@ export class MainComponent implements OnInit {
 
   filteredPokemon: any[] = [];
 
-  constructor() { }
 
-
+  /**
+   * Subscribes to the filteredPokemon$ observable to get the
+   * filtered list of Pokemon that match the current search term.
+   * This is called once, when the component is initialized.
+   */
   ngOnInit(): void {
     this.searchService.filteredPokemon$.subscribe(filtered => {
       this.filteredPokemon = filtered;
-      console.log('MainComponent - Filtered Pokemon:', this.filteredPokemon);
     });
   }
 
 
+  /**
+   * Closes the big card and re-enables scrolling on the document body.
+   */
   closePokedex(): void {
     this.bigCard.bigCardOpen = false;
     document.body.style.overflow = 'auto';
-    console.log('bigCardOpen: ', this.bigCard.bigCardOpen);
   }
 }

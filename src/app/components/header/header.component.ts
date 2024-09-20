@@ -16,20 +16,28 @@ export class HeaderComponent implements OnInit {
   public input: string = '';
   public getScreenWidth: any;
 
-  constructor() { }
 
-
+  /**
+   * Sets the initial screen width value.
+   */
   ngOnInit(): void {
     this.getScreenWidth = window.innerWidth;
   }
 
 
   @HostListener('window:resize', ['$event'])
+  /**
+   * Updates the `getScreenWidth` property with the current window width on resize
+   */
   onResize() {
     this.getScreenWidth = window.innerWidth;
   }
 
 
+  /**
+   * Calls the `setSearchTerm` method on the `searchService` with the current
+   * `input` value.
+   */
   onSearchChange() {
     this.searchService.setSearchTerm(this.input);
   }

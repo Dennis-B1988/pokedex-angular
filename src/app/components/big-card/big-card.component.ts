@@ -22,6 +22,7 @@ export class BigCardComponent implements OnChanges {
   bigCardOpen: boolean = false;
   isLoading = false;
 
+
   constructor(private cdRef: ChangeDetectorRef) { }
 
 

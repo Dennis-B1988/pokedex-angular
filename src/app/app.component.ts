@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   loading: boolean = false;
   loadingTime: number = 0;
 
+
   constructor(private pokemonService: PokemonService) { }
 
 
@@ -33,24 +34,27 @@ export class AppComponent implements OnInit {
   }
 
 
-  loadAllPokemons(): void {
-    this.loading = true;  // Start loading
+  /**
+   * Fetches the list of all Pokemons and starts processing the data.
+   */
+  private loadAllPokemons(): void {
+    this.startLoading();
     const startTime = performance.now();
 
     this.pokemonService.fetchPokemon().subscribe((data: PokeAPI) => {
       this.pokemonService.pokemons = data;
       this.processPokemonResults();
 
-      console.log(this.pokemonSaved);
-
       const endTime = performance.now();
-      this.loadingTime = endTime - startTime;  // Calculate loading time
-      this.loading = false;  // Stop loading
-      console.log(`Data loading completed in ${this.loadingTime}ms`);
+      this.loadingTime = endTime - startTime;
+      this.finishLoading();
     });
   }
 
 
+  /**
+   * Processes the fetched Pokemon results by extracting IDs and loading additional data.
+   */
   private processPokemonResults(): void {
     this.pokemonService.pokemons.results.forEach((pokemon) => {
       pokemon.id = this.extractPokemonId(pokemon.url);
@@ -60,11 +64,17 @@ export class AppComponent implements OnInit {
   }
 
 
+  /**
+   * Extracts the Pokemon ID from the provided URL.
+   */
   private extractPokemonId(url: string): string {
     return url.split('/').slice(-2, -1)[0];
   }
 
 
+  /**
+   * Loads additional details and species data for a specific Pokemon.
+   */
   private loadPokemonData(pokemon: Results): void {
     if (pokemon.id) {
       const pokemonId = parseInt(pokemon.id, 10);
@@ -79,12 +89,18 @@ export class AppComponent implements OnInit {
   }
 
 
+  /**
+   * Displays a portion of the Pokemon list based on the current count and limit.
+   */
   displayPokemons(): void {
     const pokemonsToDisplay = this.pokemonSaved.slice(this.pokemonCount, this.pokemonShown);
     pokemonsToDisplay.forEach(() => this.incrementPokemonCount());
   }
 
 
+  /**
+   * Increments the count of displayed Pokemons.
+   */
   private incrementPokemonCount(): void {
     if (this.pokemonCount < this.pokemonMax) {
       this.pokemonCount++;
@@ -92,11 +108,17 @@ export class AppComponent implements OnInit {
   }
 
 
+  /**
+   * Gets the color associated with a specific Pokemon type.
+   */
   getPokemonTypeColors(type: string): string {
     return type ? `#${pokemonTypeColors[type as keyof typeof pokemonTypeColors]}` : '';
   }
 
 
+  /**
+   * Loads more Pokemons when the user scrolls or requests more.
+   */
   loadMorePokemons(): void {
     if (this.pokemonCount < this.pokemonMax) {
       this.increasePokemonMax();
@@ -105,6 +127,9 @@ export class AppComponent implements OnInit {
   }
 
 
+  /**
+   * Increases the limit of displayed Pokemons.
+   */
   private increasePokemonMax(): void {
     if ((this.pokemonCount + 36) < this.pokemonMax) {
       this.pokemonShown += 36;
@@ -114,15 +139,36 @@ export class AppComponent implements OnInit {
   }
 
 
+  /**
+   * Helper method to mark the loading state as true.
+   */
+  private startLoading(): void {
+    this.loading = true;
+  }
+
+  /**
+   * Helper method to mark the loading state as false.
+   */
+  private finishLoading(): void {
+    this.loading = false;
+  }
+
+
+  /**
+   * Handles scroll events and loads more Pokemons if necessary.
+   */
   onScroll(): void {
     const scrollContainer = this.cardContainer.nativeElement;
-    const morePokemon = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight;
-    if (morePokemon) {
+    const shouldLoadMore = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight;
+    if (shouldLoadMore) {
       this.loadMorePokemons();
     }
   }
 
 
+  /**
+   * Scrolls the Pokemon card container back to the top.
+   */
   scrollToTop() {
     if (this.cardContainer) {
       this.cardContainer.nativeElement.scrollTop = 0;
