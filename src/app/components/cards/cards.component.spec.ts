@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { AppComponent } from '../../app.component';
+import { BigCardComponent } from '../big-card/big-card.component';
 import { CardsComponent } from './cards.component';
 
 describe('CardsComponent', () => {
@@ -8,9 +11,10 @@ describe('CardsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardsComponent]
+      imports: [CardsComponent],
+      providers: [AppComponent, HttpClient, HttpHandler, BigCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CardsComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, inject, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { StatsChartComponent } from '../stats-chart/stats-chart.component';
 
@@ -10,7 +10,7 @@ import { StatsChartComponent } from '../stats-chart/stats-chart.component';
   templateUrl: './big-card.component.html',
   styleUrl: './big-card.component.scss'
 })
-export class BigCardComponent implements OnChanges {
+export class BigCardComponent implements AfterViewInit {
 
   app = inject(AppComponent);
 
@@ -27,13 +27,11 @@ export class BigCardComponent implements OnChanges {
 
 
   /**
-   * Detects changes in `pokemonList` or `selectedPokemon` inputs and triggers change detection.
-   * @param changes - Object containing the changes to the inputs.
+   * Handle view child initialization and other operations that require DOM access
    */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['pokemonList'] || changes['selectedPokemon']) {
-      this.cdRef.detectChanges();
-    }
+  ngAfterViewInit(): void {
+    // Once the view has been initialized, detect changes if needed
+    this.cdRef.detectChanges();  // Fixes ExpressionChangedAfterItHasBeenCheckedError
   }
 
 
