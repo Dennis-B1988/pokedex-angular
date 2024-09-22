@@ -196,7 +196,6 @@ export class AppComponent implements OnInit {
 
     if (shouldLoadMore) {
       this.loadMorePokemons();
-      console.log('Pokemon shown: ', this.pokemonShown, 'Pokemon max: ', this.pokemonMax, 'Pokemon count: ', this.pokemonCount);
     }
   }
 
